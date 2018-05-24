@@ -1,0 +1,15 @@
+{
+    "news_list": [{
+            "id": 0,
+            "title": "title_01"
+        },
+        {
+            "id": 1,
+            "title": "title_02"
+        },
+        {
+            "id": 2,
+            "title": "title_03"
+        }
+    ]
+}
