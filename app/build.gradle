@@ -1,0 +1,114 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'realm-android'
+
+def code_major = (major as int) * 10000
+def code_minor = (minor as int) * 100
+def code_patch = patch as int
+
+android {
+
+    defaultConfig {
+        applicationId package_name
+        minSdkVersion min_sdk_version as int
+        targetSdkVersion target_sdk_version as int
+        versionCode code_major + code_minor + code_patch
+        versionName "${major}.${minor}.${patch}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            resValue 'string', 'app_name', "\"$release_app_name\""
+            buildConfigField 'String', "$key_base_url", "\"$release_base_url\""
+            buildConfigField 'String', "$key_basic_user_name", "\"$release_user_name\""
+            buildConfigField 'String', "$key_basic_pass", "\"$release_password\""
+        }
+
+        debug {
+            resValue 'string', 'app_name', "\"$debug_app_name\""
+            buildConfigField 'String', "$key_base_url", "\"$debug_base_url\""
+            buildConfigField 'String', "$key_basic_user_name", "\"$debug_user_name\""
+            buildConfigField 'String', "$key_basic_pass", "\"$debug_password\""
+        }
+
+        local {
+            debuggable true
+            initWith debug
+
+            resValue 'string', 'app_name', "\"$local_app_name\""
+            buildConfigField 'String', "$key_base_url", "\"$local_base_url\""
+            buildConfigField 'String', "$key_basic_user_name", "\"$local_user_name\""
+            buildConfigField 'String', "$key_basic_pass", "\"$local_password\""
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    compileSdkVersion compile_sdk_version as int
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support Library
+    implementation "com.android.support.constraint:constraint-layout:1.1.0"
+    implementation "com.android.support:appcompat-v7:$support_lib_version"
+    compile "com.android.support:recyclerview-v7:$support_lib_version"
+    compile "com.android.support:support-v4:$support_lib_version"
+
+    // Dependency Injection
+    implementation 'com.google.dagger:dagger:2.14.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
+
+    // Reactive X
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.0'
+
+    // API Client
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    // Json Parser
+    implementation 'com.squareup.moshi:moshi:1.5.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
+    implementation 'com.squareup.moshi:moshi-adapters:1.5.0'
+
+    // Debug Log
+    implementation 'com.jakewharton.timber:timber:4.7.0'
+
+    // Test Library
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+kapt {
+    generateStubs = true
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "https://maven.google.com"
+    }
+}
