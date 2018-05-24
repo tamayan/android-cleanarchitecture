@@ -1,5 +1,41 @@
 # Android CleanArchitecture Sample
 
+## Directory
+
+```tree
+cleanarchitecture/
+├── data
+│   ├── datastore
+│   │   ├── cloud
+│   │   │   └── client
+│   │   │       ├── okhttp
+│   │   │       └── retrofit
+│   │   │           └── service
+│   │   └── disk
+│   ├── entity
+│   │   ├── json
+│   │   └── realm
+│   └── repository
+├── di
+│   ├── component
+│   └── module
+├── domain
+│   ├── entity
+│   ├── exception
+│   ├── repository
+│   └── usecase
+│       └── base
+├── presentation
+│   ├── entity
+│   ├── mvp
+│   │   ├── presenter
+│   │   └── view
+│   └── ui
+│       ├── activity
+│       └── adapter
+└── util
+```
+
 ## API
 
 webサーバーを建てて、サーバーから `news-list.json` を受け取れるようにしてください。
