@@ -36,6 +36,24 @@ cleanarchitecture/
 └── util
 ```
 
+## Library
+
+- [Dagger2](https://github.com/google/dagger)
+- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+- [RxJava](https://github.com/ReactiveX/RxJava)
+- [RxKotlin](https://github.com/ReactiveX/RxKotlin)
+- [RxBinding](https://github.com/JakeWharton/RxBinding)
+- [Retrofit2](https://github.com/square/retrofit)
+- [Moshi](https://github.com/square/moshi)
+- [Timber](https://github.com/JakeWharton/timber)
+
+### Android Support Libraries
+
+- Constraint Layout
+- Appcompat v7
+- Recyclerview v7
+- Support v4
+
 ## API
 
 webサーバーを建てて、サーバーから `news-list.json` を受け取れるようにしてください。
