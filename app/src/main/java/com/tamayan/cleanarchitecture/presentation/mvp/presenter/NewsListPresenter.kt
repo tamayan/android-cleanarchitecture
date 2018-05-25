@@ -5,6 +5,8 @@ import com.tamayan.cleanarchitecture.presentation.entity.NewsViewEntity
 import com.tamayan.cleanarchitecture.presentation.mvp.view.NewsListView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
@@ -17,6 +19,8 @@ class NewsListPresenter @Inject constructor(
         private val view: NewsListView
 ) : Presenter<NewsListView>(view) {
 
+    private val compositeDisposable = CompositeDisposable()
+
     override fun start() {
         getNewsList()
         view.newsListRefresh()
@@ -28,6 +32,7 @@ class NewsListPresenter @Inject constructor(
                             view.showToast(it.message.toString())
                         }
                 )
+                .addTo(compositeDisposable)
     }
 
     override fun stop() {
@@ -36,6 +41,7 @@ class NewsListPresenter @Inject constructor(
 
     override fun destroy() {
         // no-op
+        compositeDisposable.clear()
     }
 
     private fun getNewsList() {
@@ -55,5 +61,6 @@ class NewsListPresenter @Inject constructor(
                             view.showToast(it.message.toString())
                         }
                 )
+                .addTo(compositeDisposable)
     }
 }

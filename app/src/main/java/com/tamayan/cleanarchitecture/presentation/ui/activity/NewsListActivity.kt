@@ -34,6 +34,12 @@ class NewsListActivity : Activity(), NewsListView {
         setContentView(R.layout.activity_news_list)
         inject()
         setup()
+        presenter.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.destroy()
     }
 
     override fun showNewsList(list: List<NewsViewEntity>) {
@@ -74,7 +80,5 @@ class NewsListActivity : Activity(), NewsListView {
     private fun setup() {
         newsListRecyclerView.layoutManager = LinearLayoutManager(this)
         newsListRecyclerView.adapter = adapter
-
-        presenter.start()
     }
 }
