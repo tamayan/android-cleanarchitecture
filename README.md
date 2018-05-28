@@ -38,6 +38,7 @@ cleanarchitecture/
 
 ## Library
 
+- [Realm Java](https://github.com/realm/realm-java)
 - [Dagger2](https://github.com/google/dagger)
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
 - [RxJava](https://github.com/ReactiveX/RxJava)
