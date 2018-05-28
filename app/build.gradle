@@ -68,8 +68,8 @@ dependencies {
     // Support Library
     implementation "com.android.support.constraint:constraint-layout:1.1.0"
     implementation "com.android.support:appcompat-v7:$support_lib_version"
-    compile "com.android.support:recyclerview-v7:$support_lib_version"
-    compile "com.android.support:support-v4:$support_lib_version"
+    implementation "com.android.support:recyclerview-v7:$support_lib_version"
+    implementation "com.android.support:support-v4:$support_lib_version"
 
     // Dependency Injection
     implementation 'com.google.dagger:dagger:2.14.1'
