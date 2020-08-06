@@ -6,7 +6,7 @@ import io.reactivex.Single
 @Dao
 abstract class NewsDao {
 
-    @Query(value = "SELECT * FROM news WHERE id (:id)")
+    @Query(value = "SELECT * FROM news WHERE id = :id")
     abstract fun find(id: Int): Single<NewsEntity>
 
     @Query(value = "SELECT * FROM news")
