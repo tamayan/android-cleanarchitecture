@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.di.module
 
-import com.squareup.moshi.Moshi
 import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.data.datastore.NewsDataStore
 import com.example.cleanarchitecture.data.datastore.ReadNewsDataStore
@@ -12,6 +11,7 @@ import com.example.cleanarchitecture.data.repository.NewsRepositoryImpl
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
 import com.example.cleanarchitecture.presentation.mvp.view.NewsListView
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 
