@@ -1,9 +1,9 @@
 package com.example.cleanarchitecture.di.module
 
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
 import com.example.cleanarchitecture.data.repository.BasicCredentialProviderImpl
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

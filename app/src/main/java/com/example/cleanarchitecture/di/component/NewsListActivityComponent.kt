@@ -8,7 +8,7 @@ import dagger.Subcomponent
  * Created by tamayan on 2018/02/04.
  */
 
-@Subcomponent(modules = arrayOf(NewsListActivityModule::class))
+@Subcomponent(modules = [NewsListActivityModule::class])
 interface NewsListActivityComponent {
 
     fun inject(newsListActivity: NewsListActivity)

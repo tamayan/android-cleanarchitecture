@@ -1,8 +1,8 @@
 package com.example.cleanarchitecture.di.component
 
-import com.squareup.moshi.Moshi
-import com.example.cleanarchitecture.di.module.ApplicationModule
 import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
+import com.example.cleanarchitecture.di.module.ApplicationModule
+import com.squareup.moshi.Moshi
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,7 +11,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf(ApplicationModule::class))
+@Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
 
     fun activityComponent(): ActivityComponent
