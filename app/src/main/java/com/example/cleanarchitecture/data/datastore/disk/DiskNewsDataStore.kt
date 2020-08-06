@@ -21,12 +21,10 @@ class DiskNewsDataStore : ReadNewsDataStore {
                 realm.insertOrUpdate(newsList.map { NewsRealmEntity(it.id, it.title) })
                 realm.commitTransaction()
                 emitter.onComplete()
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 realm.cancelTransaction()
                 emitter.onError(e)
-            }
-            finally {
+            } finally {
                 realm.close()
             }
         }
@@ -35,7 +33,7 @@ class DiskNewsDataStore : ReadNewsDataStore {
     override fun fetch(id: Int): Single<News> {
         return Single.create {
             val realm = Realm.getDefaultInstance()
-            val realmEntity = realm.where(clazz).equalTo(ID, id).findFirst()
+            val realmEntity = realm.where(NewsRealmEntityClass).equalTo(ID, id).findFirst()
             val news = News(realmEntity?.id ?: 0, realmEntity?.title ?: "no title")
             realm.close()
             it.onSuccess(news)
@@ -43,19 +41,19 @@ class DiskNewsDataStore : ReadNewsDataStore {
     }
 
     override fun fetch(): Single<List<News>> {
-        return Single.create {
+        return Single.create { singleEmitter ->
             val realm = Realm.getDefaultInstance()
-            val newsList = realm.where(clazz).findAll().map {
-                News(it?.id ?: 0, it?.title ?: "no title")
+            val newsList = realm.where(NewsRealmEntityClass).findAll().map { realmEntity ->
+                News(realmEntity.id ?: 0, realmEntity.title ?: "no title")
             }
             realm.close()
-            it.onSuccess(newsList)
+            singleEmitter.onSuccess(newsList)
         }
     }
 
     companion object {
 
-        private val clazz = NewsRealmEntity::class.java
+        private val NewsRealmEntityClass = NewsRealmEntity::class.java
 
         private const val ID = "id"
     }

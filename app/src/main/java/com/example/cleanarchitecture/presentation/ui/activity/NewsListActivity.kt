@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
-import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.di.module.NewsListActivityModule
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
@@ -14,6 +13,7 @@ import com.example.cleanarchitecture.presentation.mvp.presenter.NewsListPresente
 import com.example.cleanarchitecture.presentation.mvp.view.NewsListView
 import com.example.cleanarchitecture.presentation.myApplication
 import com.example.cleanarchitecture.presentation.ui.adapter.NewsListAdapter
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_news_list.*
