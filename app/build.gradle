@@ -3,6 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+// TODO: Room移行時に削除
+apply plugin: 'realm-android'
+
 def getLocalProperties(String key) {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -14,7 +17,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.cleanarchitecture" // TODO: rename
+        applicationId "com.example.cleanarchitecture"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
