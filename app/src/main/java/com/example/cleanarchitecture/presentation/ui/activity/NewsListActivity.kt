@@ -3,9 +3,9 @@ package com.example.cleanarchitecture.presentation.ui.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.di.module.NewsListActivityModule
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
