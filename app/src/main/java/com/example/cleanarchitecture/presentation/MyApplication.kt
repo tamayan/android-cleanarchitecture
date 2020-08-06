@@ -5,6 +5,7 @@ import android.app.Application
 import com.example.cleanarchitecture.di.component.ActivityComponent
 import com.example.cleanarchitecture.di.component.DaggerApplicationComponent
 import com.example.cleanarchitecture.di.module.ApplicationModule
+import io.realm.Realm
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -24,7 +25,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        Realm.init(applicationContext)
+        Realm.init(applicationContext)
         Timber.plant(DebugTree())
     }
 }

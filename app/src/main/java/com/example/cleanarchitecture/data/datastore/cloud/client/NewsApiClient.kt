@@ -1,11 +1,11 @@
 package com.example.cleanarchitecture.data.datastore.cloud.client
 
-import com.squareup.moshi.Moshi
 import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
 import com.example.cleanarchitecture.data.datastore.cloud.client.retrofit.RetrofitJsonClient
 import com.example.cleanarchitecture.data.datastore.cloud.client.retrofit.service.NewsService
 import com.example.cleanarchitecture.data.entity.json.NewsRequestEntity
-import com.example.cleanarchitecture.data.entity.json.NewsResponseListEntity
+import com.example.cleanarchitecture.data.entity.json.NewsResponseEntity
+import com.squareup.moshi.Moshi
 import retrofit2.Response
 import retrofit2.Retrofit
 
@@ -14,9 +14,9 @@ import retrofit2.Retrofit
  */
 
 class NewsApiClient(moshi: Moshi, baseUrl: String, basicCredentialProvider: BasicCredentialProvider) :
-        RetrofitJsonClient<NewsRequestEntity, NewsResponseListEntity>(moshi, baseUrl, basicCredentialProvider) {
+        RetrofitJsonClient<NewsRequestEntity, List<NewsResponseEntity>>(moshi, baseUrl, basicCredentialProvider) {
 
-    override fun requestActual(retrofit: Retrofit, requestEntity: NewsRequestEntity): Response<NewsResponseListEntity> {
+    override fun requestActual(retrofit: Retrofit, requestEntity: NewsRequestEntity): Response<List<NewsResponseEntity>> {
         return retrofit
                 .create(NewsService::class.java)
                 .getNewsList()

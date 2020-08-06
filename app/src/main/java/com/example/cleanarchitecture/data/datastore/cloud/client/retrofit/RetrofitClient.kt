@@ -35,18 +35,15 @@ abstract class RetrofitClient<in RequestEntity, ResponseEntity>(private val base
                 if (!emitter.isDisposed) {
                     emitter.onSuccess(entity)
                 }
-            }
-            catch (exception: UnknownHostException) {
+            } catch (exception: UnknownHostException) {
                 if (!emitter.isDisposed) {
                     emitter.onError(NetworkException("Unknown host.", exception))
                 }
-            }
-            catch (exception: SocketTimeoutException) {
+            } catch (exception: SocketTimeoutException) {
                 if (!emitter.isDisposed) {
                     emitter.onError(NetworkException("Socket timed out.", exception))
                 }
-            }
-            catch (exception: RuntimeException) {
+            } catch (exception: RuntimeException) {
                 if (!emitter.isDisposed) {
                     emitter.onError(exception)
                 }

@@ -1,6 +1,6 @@
 package com.example.cleanarchitecture.data.datastore.cloud.client.retrofit.service
 
-import com.example.cleanarchitecture.data.entity.json.NewsResponseListEntity
+import com.example.cleanarchitecture.data.entity.json.NewsResponseEntity
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,6 +10,6 @@ import retrofit2.http.GET
 
 interface NewsService {
 
-    @GET("news-list.json")
-    fun getNewsList(): Call<NewsResponseListEntity>
+    @GET("news")
+    fun getNewsList(): Call<List<NewsResponseEntity>>
 }
