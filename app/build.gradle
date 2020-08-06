@@ -23,6 +23,9 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Room Database Name
+        buildConfigField "String", "ROOM_DATABASE_NAME", "\"AppDatabase.db\""
     }
 
     buildTypes {
@@ -55,8 +58,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     compileOptions {
