@@ -1,12 +1,13 @@
 package com.example.cleanarchitecture.data.datastore.disk.db
 
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface NewsDatabase {
 
-    fun save(news: NewsEntity)
+    fun save(news: NewsEntity): Completable
 
-    fun save(newsList: List<NewsEntity>)
+    fun save(newsList: List<NewsEntity>): Completable
 
     fun replaceAll(newsList: List<NewsEntity>)
 

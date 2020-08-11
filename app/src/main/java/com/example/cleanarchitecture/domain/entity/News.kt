@@ -8,5 +8,6 @@ package com.example.cleanarchitecture.domain.entity
 
 data class News(
         val id: Int,
-        val title: String
+        val title: String,
+        val text: String
 )

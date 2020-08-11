@@ -2,10 +2,12 @@ package com.example.cleanarchitecture.presentation
 
 import android.app.Activity
 import android.app.Application
-import com.example.cleanarchitecture.di.component.ActivityComponent
+import androidx.room.Room
+import com.example.cleanarchitecture.BuildConfig
+import com.example.cleanarchitecture.data.datastore.disk.db.AppDatabase
+import com.example.cleanarchitecture.di.component.ApplicationComponent
 import com.example.cleanarchitecture.di.component.DaggerApplicationComponent
 import com.example.cleanarchitecture.di.module.ApplicationModule
-import io.realm.Realm
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -15,17 +17,22 @@ import timber.log.Timber.DebugTree
 
 class MyApplication : Application() {
 
-    val activityComponent: ActivityComponent by lazy {
+    val applicationComponent: ApplicationComponent by lazy {
+        val appDatabase = Room
+                .databaseBuilder(
+                        this,
+                        AppDatabase::class.java,
+                        BuildConfig.ROOM_DATABASE_NAME)
+                .build()
+
         DaggerApplicationComponent
                 .builder()
-                .applicationModule(ApplicationModule())
+                .applicationModule(ApplicationModule(appDatabase))
                 .build()
-                .activityComponent()
     }
 
     override fun onCreate() {
         super.onCreate()
-        Realm.init(applicationContext)
         Timber.plant(DebugTree())
     }
 }

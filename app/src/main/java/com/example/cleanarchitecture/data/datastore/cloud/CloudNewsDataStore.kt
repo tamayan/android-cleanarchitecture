@@ -18,7 +18,7 @@ class CloudNewsDataStore(private val client: ApiClient<NewsRequestEntity, List<N
         return client
                 .request(NewsRequestEntity())
                 .flatMapObservable { Observable.fromIterable(it) }
-                .map { News(id = it.id, title = it.title) }
+                .map { News(id = it.id, title = it.title, text = it.text) }
                 .toList()
     }
 }

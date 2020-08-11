@@ -8,5 +8,6 @@ package com.example.cleanarchitecture.data.entity.json
 
 data class NewsResponseEntity(
         val id: Int,
-        val title: String
+        val title: String,
+        val text: String
 )
