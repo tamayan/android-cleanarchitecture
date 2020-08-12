@@ -17,16 +17,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class ApplicationModule(application: Application) {
-
-    private val appDatabase: AppDatabase by lazy {
-        Room
-                .databaseBuilder(
-                        application,
-                        AppDatabase::class.java,
-                        BuildConfig.ROOM_DATABASE_NAME)
-                .build()
-    }
+class ApplicationModule(private val application: Application) {
 
     @Singleton
     @Provides
@@ -42,5 +33,12 @@ class ApplicationModule(application: Application) {
 
     @Singleton
     @Provides
-    fun provideRoom(): AppDatabase = appDatabase
+    fun provideRoom(): AppDatabase {
+        return Room
+                .databaseBuilder(
+                        application,
+                        AppDatabase::class.java,
+                        BuildConfig.ROOM_DATABASE_NAME)
+                .build()
+    }
 }
