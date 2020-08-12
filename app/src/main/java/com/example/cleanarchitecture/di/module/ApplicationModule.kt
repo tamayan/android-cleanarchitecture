@@ -1,5 +1,8 @@
 package com.example.cleanarchitecture.di.module
 
+import android.app.Application
+import androidx.room.Room
+import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
 import com.example.cleanarchitecture.data.datastore.disk.db.AppDatabase
 import com.example.cleanarchitecture.data.repository.BasicCredentialProviderImpl
@@ -14,7 +17,16 @@ import javax.inject.Singleton
  */
 
 @Module
-class ApplicationModule(private val appDatabase: AppDatabase) {
+class ApplicationModule(application: Application) {
+
+    private val appDatabase: AppDatabase by lazy {
+        Room
+                .databaseBuilder(
+                        application,
+                        AppDatabase::class.java,
+                        BuildConfig.ROOM_DATABASE_NAME)
+                .build()
+    }
 
     @Singleton
     @Provides
