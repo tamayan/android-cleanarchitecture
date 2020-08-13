@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.di.module
+package com.example.cleanarchitecture.di
 
 import android.app.Application
 import androidx.room.Room

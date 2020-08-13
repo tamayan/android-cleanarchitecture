@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.di.component.DaggerApplicationComponent
-import com.example.cleanarchitecture.di.module.ApplicationModule
-import com.example.cleanarchitecture.di.module.NewsListActivityModule
+import com.example.cleanarchitecture.di.ApplicationModule
+import com.example.cleanarchitecture.di.NewsListActivityModule
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
 import com.example.cleanarchitecture.presentation.mvp.presenter.NewsListPresenter
 import com.example.cleanarchitecture.presentation.mvp.view.NewsListView

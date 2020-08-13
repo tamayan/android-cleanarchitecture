@@ -1,8 +1,8 @@
-package com.example.cleanarchitecture.di.component
+package com.example.cleanarchitecture.di
 
-import com.example.cleanarchitecture.di.module.ActivityModule
-import com.example.cleanarchitecture.di.module.ApplicationModule
-import com.example.cleanarchitecture.di.module.NewsListActivityModule
+import com.example.cleanarchitecture.di.ActivityModule
+import com.example.cleanarchitecture.di.ApplicationModule
+import com.example.cleanarchitecture.di.NewsListActivityModule
 import com.example.cleanarchitecture.presentation.ui.activity.NewsListActivity
 import dagger.Component
 import javax.inject.Singleton
