@@ -1,6 +1,7 @@
-package com.example.cleanarchitecture.presentation.mvp.view
+package com.example.cleanarchitecture.presentation.newslist
 
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
+import com.example.cleanarchitecture.presentation.ProgressView
 import io.reactivex.Observable
 
 /**

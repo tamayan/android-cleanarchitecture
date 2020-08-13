@@ -1,8 +1,8 @@
-package com.example.cleanarchitecture.presentation.mvp.presenter
+package com.example.cleanarchitecture.presentation.newslist
 
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
+import com.example.cleanarchitecture.presentation.Presenter
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
-import com.example.cleanarchitecture.presentation.mvp.view.NewsListView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

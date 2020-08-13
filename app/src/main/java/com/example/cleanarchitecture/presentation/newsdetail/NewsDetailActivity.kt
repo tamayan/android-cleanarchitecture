@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.presentation.ui.activity
+package com.example.cleanarchitecture.presentation.newsdetail
 
 import android.app.Activity
 import android.content.Context

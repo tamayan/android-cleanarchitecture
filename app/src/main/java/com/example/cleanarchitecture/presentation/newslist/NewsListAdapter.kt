@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.presentation.ui.adapter
+package com.example.cleanarchitecture.presentation.newslist
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
-import com.example.cleanarchitecture.presentation.ui.activity.NewsDetailActivity
+import com.example.cleanarchitecture.presentation.newsdetail.NewsDetailActivity
 import kotlinx.android.synthetic.main.activity_news_detail.view.*
 
 /**

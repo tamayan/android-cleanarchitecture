@@ -12,7 +12,7 @@ import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
 import com.example.cleanarchitecture.data.repository.NewsRepositoryImpl
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
-import com.example.cleanarchitecture.presentation.mvp.view.NewsListView
+import com.example.cleanarchitecture.presentation.newslist.NewsListView
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

@@ -16,7 +16,7 @@
 
         <!-- News List -->
         <activity
-                android:name=".presentation.ui.activity.NewsListActivity"
+                android:name=".presentation.newslist.NewsListActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,7 +26,7 @@
 
         <!-- News Detail -->
         <activity
-                android:name=".presentation.ui.activity.NewsDetailActivity"
+                android:name=".presentation.newsdetail.NewsDetailActivity"
                 android:screenOrientation="portrait"/>
 
     </application>

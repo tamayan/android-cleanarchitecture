@@ -1,6 +1,6 @@
 package com.example.cleanarchitecture.di
 
-import com.example.cleanarchitecture.presentation.ui.activity.NewsListActivity
+import com.example.cleanarchitecture.presentation.newslist.NewsListActivity
 import dagger.Component
 import javax.inject.Singleton
 

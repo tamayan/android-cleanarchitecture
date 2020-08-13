@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.presentation.mvp.presenter
+package com.example.cleanarchitecture.presentation
 
 /**
  * Created by tamayan on 2017/12/10.

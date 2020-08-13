@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.presentation.ui.activity
+package com.example.cleanarchitecture.presentation.newslist
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -7,14 +7,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.di.component.DaggerApplicationComponent
 import com.example.cleanarchitecture.di.ApplicationModule
+import com.example.cleanarchitecture.di.DaggerApplicationComponent
 import com.example.cleanarchitecture.di.NewsListActivityModule
 import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
-import com.example.cleanarchitecture.presentation.mvp.presenter.NewsListPresenter
-import com.example.cleanarchitecture.presentation.mvp.view.NewsListView
 import com.example.cleanarchitecture.presentation.myApplication
-import com.example.cleanarchitecture.presentation.ui.adapter.NewsListAdapter
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
