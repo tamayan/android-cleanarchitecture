@@ -1,84 +1,43 @@
 package com.example.cleanarchitecture.presentation.newslist
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.di.ApplicationModule
-import com.example.cleanarchitecture.di.DaggerApplicationComponent
-import com.example.cleanarchitecture.di.NewsListActivityModule
-import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
+import com.example.cleanarchitecture.databinding.ActivityNewsListBinding
 import com.example.cleanarchitecture.presentation.myApplication
-import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_news_list.*
 import javax.inject.Inject
 
 
-class NewsListActivity : Activity(), NewsListView {
+class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var presenter: NewsListPresenter
+    lateinit var newsListViewModel: NewsListViewModel
 
-    private val adapter: NewsListAdapter by lazy {
-        NewsListAdapter(this)
+    private val binding: ActivityNewsListBinding by lazy {
+        DataBindingUtil
+                .setContentView<ActivityNewsListBinding>(this, R.layout.activity_news_list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-        inject()
-        setup()
-        presenter.start()
+
+        myApplication.applicationComponent.inject(this)
+
+        binding.swipeRefreshLayout.setOnRefreshListener(this)
+        binding.viewModel = newsListViewModel
+        newsListViewModel.isLoading.observe(this, Observer<Boolean> {
+            swipeRefreshLayout.isRefreshing = it as Boolean
+        })
+
+        newsListViewModel.load()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.destroy()
-    }
-
-    override fun showNewsList(list: List<NewsViewEntity>) {
-        adapter.update(list)
-        // Done Update
-        swipeRefreshLayout.isRefreshing = false
-    }
-
-    override fun showProgress() {
-        progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        progressBar.visibility = View.GONE
-    }
-
-    @SuppressLint("ShowToast")
-    override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG)
-    }
-
-    override fun newsListRefresh(): Observable<Unit> {
-        return RxSwipeRefreshLayout
-                .refreshes(swipeRefreshLayout)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { Unit }
-    }
-
-    private fun inject() {
-        DaggerApplicationComponent
-                .builder()
-                .applicationModule(ApplicationModule(myApplication))
-                .newsListActivityModule(NewsListActivityModule(this))
-                .build()
-                .inject(this)
-    }
-
-    private fun setup() {
-        newsListRecyclerView.layoutManager = LinearLayoutManager(this)
-        newsListRecyclerView.adapter = adapter
+    override fun onRefresh() {
+        newsListViewModel.load()
     }
 }

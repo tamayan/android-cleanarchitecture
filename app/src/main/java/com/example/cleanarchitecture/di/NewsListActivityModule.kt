@@ -12,7 +12,7 @@ import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
 import com.example.cleanarchitecture.data.repository.NewsRepositoryImpl
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
-import com.example.cleanarchitecture.presentation.newslist.NewsListView
+import com.example.cleanarchitecture.presentation.newslist.NewsListViewModel
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class NewsListActivityModule(private val newsListView: NewsListView) {
+class NewsListActivityModule {
 
     @Singleton
     @Provides
@@ -50,9 +50,10 @@ class NewsListActivityModule(private val newsListView: NewsListView) {
             NewsRepositoryImpl(newsDataStore, newsDatabase)
 
     @Provides
-    fun provideGetNewsListUseCase(newsRepository: NewsRepository) =
+    fun provideGetNewsListUseCase(newsRepository: NewsRepository): GetNewsListUseCase =
             GetNewsListUseCase(newsRepository)
 
     @Provides
-    fun provideNewsListView() = newsListView
+    fun provideNewsListViewModel(getNewsListUseCase: GetNewsListUseCase): NewsListViewModel =
+            NewsListViewModel(getNewsListUseCase)
 }
