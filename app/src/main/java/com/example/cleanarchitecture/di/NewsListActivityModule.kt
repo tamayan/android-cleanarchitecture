@@ -7,7 +7,6 @@ import com.example.cleanarchitecture.data.datastore.cloud.client.NewsApiClient
 import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
 import com.example.cleanarchitecture.data.datastore.disk.NewsRoomDatabase
 import com.example.cleanarchitecture.data.datastore.disk.db.AppDatabase
-import com.example.cleanarchitecture.data.datastore.disk.db.NewsDao
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
 import com.example.cleanarchitecture.data.repository.NewsRepositoryImpl
 import com.example.cleanarchitecture.domain.repository.NewsRepository
@@ -37,13 +36,8 @@ class NewsListActivityModule {
 
     @Singleton
     @Provides
-    fun provideNewsDao(database: AppDatabase): NewsDao =
-            database.newsDao()
-
-    @Singleton
-    @Provides
-    fun provideNewsRoomDatabase(database: AppDatabase, newsDao: NewsDao): NewsDatabase =
-            NewsRoomDatabase(database, newsDao)
+    fun provideNewsRoomDatabase(database: AppDatabase): NewsDatabase =
+            NewsRoomDatabase(database, database.newsDao())
 
     @Provides
     fun provideNewsRepository(newsDataStore: NewsDataStore, newsDatabase: NewsDatabase): NewsRepository =
