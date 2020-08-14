@@ -24,13 +24,11 @@ class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefresh
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.viewModel = newsListViewModel
         newsListViewModel.isLoading.observe(this, Observer<Boolean> {
             swipeRefreshLayout.isRefreshing = it as Boolean
         })
-
         newsListViewModel.load()
     }
 

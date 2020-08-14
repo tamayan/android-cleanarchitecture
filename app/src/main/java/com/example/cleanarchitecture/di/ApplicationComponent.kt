@@ -2,7 +2,6 @@ package com.example.cleanarchitecture.di
 
 import android.content.Context
 import com.example.cleanarchitecture.presentation.MyApplication
-import com.example.cleanarchitecture.presentation.newslist.NewsListActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -26,6 +25,4 @@ interface ApplicationComponent : AndroidInjector<MyApplication> {
     interface Factory {
         fun create(@BindsInstance applicationContext: Context): ApplicationComponent
     }
-
-    fun inject(newsListActivity: NewsListActivity)
 }
