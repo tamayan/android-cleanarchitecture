@@ -3,7 +3,7 @@ package com.example.cleanarchitecture.data.repository
 import com.example.cleanarchitecture.data.datastore.NewsDataStore
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsEntity
-import com.example.cleanarchitecture.di.ApplicationModule
+import com.example.cleanarchitecture.di.NewsListActivityModule
 import com.example.cleanarchitecture.domain.entity.News
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import io.reactivex.Completable
@@ -16,8 +16,8 @@ import javax.inject.Inject
  */
 
 class NewsRepositoryImpl @Inject constructor(
-        @ApplicationModule.CloudNewsDataStore private val newsDataStore: NewsDataStore,
-        @ApplicationModule.NewsRoomDatabase private val newsDatabase: NewsDatabase
+        @NewsListActivityModule.CloudNewsDataStore private val newsDataStore: NewsDataStore,
+        @NewsListActivityModule.NewsRoomDatabase private val newsDatabase: NewsDatabase
 ) : NewsRepository {
 
     override fun getNewsList(): Single<List<News>> =
