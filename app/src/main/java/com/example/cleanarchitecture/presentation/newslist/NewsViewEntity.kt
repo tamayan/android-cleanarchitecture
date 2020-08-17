@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.presentation.entity
+package com.example.cleanarchitecture.presentation.newslist
 
 /**
  * Created by tamayan on 2017/11/23.

@@ -1,8 +1,8 @@
-package com.example.cleanarchitecture.data.datastore
+package com.example.cleanarchitecture.data
 
-import com.example.cleanarchitecture.data.datastore.database.NewsDatabase
-import com.example.cleanarchitecture.data.datastore.database.NewsEntity
-import com.example.cleanarchitecture.data.datastore.remote.NewsDataStore
+import com.example.cleanarchitecture.data.database.NewsDatabase
+import com.example.cleanarchitecture.data.database.room.NewsEntity
+import com.example.cleanarchitecture.data.remote.NewsDataStore
 import com.example.cleanarchitecture.domain.entity.News
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import io.reactivex.Completable

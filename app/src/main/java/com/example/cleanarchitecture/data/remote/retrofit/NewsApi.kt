@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.datastore.remote
+package com.example.cleanarchitecture.data.remote.retrofit
 
 import io.reactivex.Single
 import retrofit2.http.GET

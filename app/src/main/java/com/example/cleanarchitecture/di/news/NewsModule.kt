@@ -1,12 +1,12 @@
 package com.example.cleanarchitecture.di.news
 
-import com.example.cleanarchitecture.data.datastore.NewsRepositoryImpl
-import com.example.cleanarchitecture.data.datastore.database.AppDatabase
-import com.example.cleanarchitecture.data.datastore.database.NewsDatabase
-import com.example.cleanarchitecture.data.datastore.database.NewsRoomDatabase
-import com.example.cleanarchitecture.data.datastore.remote.CloudNewsDataStore
-import com.example.cleanarchitecture.data.datastore.remote.NewsApi
-import com.example.cleanarchitecture.data.datastore.remote.NewsDataStore
+import com.example.cleanarchitecture.data.NewsRepositoryImpl
+import com.example.cleanarchitecture.data.database.room.AppDatabase
+import com.example.cleanarchitecture.data.database.NewsDatabase
+import com.example.cleanarchitecture.data.database.room.NewsRoomDatabase
+import com.example.cleanarchitecture.data.remote.retrofit.CloudNewsDataStore
+import com.example.cleanarchitecture.data.remote.retrofit.NewsApi
+import com.example.cleanarchitecture.data.remote.NewsDataStore
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
 import com.example.cleanarchitecture.presentation.newslist.NewsListViewModel

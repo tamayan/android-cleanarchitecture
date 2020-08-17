@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.datastore.remote
+package com.example.cleanarchitecture.data.remote.retrofit
 
 /**
  * Created by tamayan on 2017/11/23.

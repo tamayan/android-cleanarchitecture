@@ -1,5 +1,6 @@
-package com.example.cleanarchitecture.data.datastore.database
+package com.example.cleanarchitecture.data.database.room
 
+import com.example.cleanarchitecture.data.database.NewsDatabase
 import io.reactivex.Completable
 import io.reactivex.Single
 

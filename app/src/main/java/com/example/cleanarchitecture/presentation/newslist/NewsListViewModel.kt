@@ -4,7 +4,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
-import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

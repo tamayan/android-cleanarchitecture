@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.datastore.remote
+package com.example.cleanarchitecture.data.remote
 
 import com.example.cleanarchitecture.domain.entity.News
 import io.reactivex.Single

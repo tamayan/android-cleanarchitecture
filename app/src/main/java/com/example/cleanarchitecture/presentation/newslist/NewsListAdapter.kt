@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanarchitecture.databinding.ListItemNewsBinding
-import com.example.cleanarchitecture.presentation.entity.NewsViewEntity
 import com.example.cleanarchitecture.presentation.newslist.NewsListAdapter.BindViewHolder
 
 class NewsListAdapter : RecyclerView.Adapter<BindViewHolder>() {

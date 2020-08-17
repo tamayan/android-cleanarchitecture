@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.datastore.database
+package com.example.cleanarchitecture.data.database.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
