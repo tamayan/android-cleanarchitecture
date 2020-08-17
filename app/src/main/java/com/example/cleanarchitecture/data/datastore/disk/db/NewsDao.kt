@@ -4,28 +4,28 @@ import androidx.room.*
 import io.reactivex.Single
 
 @Dao
-abstract class NewsDao {
+interface NewsDao {
 
     @Query(value = "SELECT * FROM news WHERE id = :id")
-    abstract fun find(id: Int): Single<NewsEntity>
+    fun find(id: Int): Single<NewsEntity>
 
     @Query(value = "SELECT * FROM news")
-    abstract fun findAll(): Single<List<NewsEntity>>
+    fun findAll(): Single<List<NewsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertOrUpdate(news: NewsEntity)
+    fun insertOrUpdate(news: NewsEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertOrUpdate(newsList: List<NewsEntity>)
+    fun insertOrUpdate(newsList: List<NewsEntity>)
 
     @Delete
-    abstract fun delete(news: NewsEntity)
+    fun delete(news: NewsEntity)
 
     @Query(value = "DELETE FROM news")
-    abstract fun deleteTable()
+    fun deleteTable()
 
     @Transaction
-    open fun deleteAndInsert(newsList: List<NewsEntity>) {
+    fun deleteAndInsert(newsList: List<NewsEntity>) {
         deleteTable()
         insertOrUpdate(newsList)
     }

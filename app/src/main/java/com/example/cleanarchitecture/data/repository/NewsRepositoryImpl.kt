@@ -3,22 +3,18 @@ package com.example.cleanarchitecture.data.repository
 import com.example.cleanarchitecture.data.datastore.NewsDataStore
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsEntity
-import com.example.cleanarchitecture.di.NewsListActivityModule
 import com.example.cleanarchitecture.domain.entity.News
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import javax.inject.Inject
 
 /**
  * Created by tamayan on 2017/12/09.
  */
 
-class NewsRepositoryImpl @Inject constructor(
-        @NewsListActivityModule.CloudNewsDataStore private val newsDataStore: NewsDataStore,
-        @NewsListActivityModule.NewsRoomDatabase private val newsDatabase: NewsDatabase
-) : NewsRepository {
+class NewsRepositoryImpl(private val newsDataStore: NewsDataStore,
+                         private val newsDatabase: NewsDatabase) : NewsRepository {
 
     override fun getNewsList(): Single<List<News>> =
             newsDataStore.getNewsList()
