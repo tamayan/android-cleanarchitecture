@@ -6,7 +6,7 @@ package com.example.cleanarchitecture.data.remote.retrofit
  * お知らせのJsonEntityです。
  */
 
-data class NewsResponseEntity(
+data class NewsJson(
         val id: Int,
         val title: String,
         val text: String
