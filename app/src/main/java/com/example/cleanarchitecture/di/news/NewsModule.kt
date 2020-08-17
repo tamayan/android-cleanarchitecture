@@ -1,10 +1,8 @@
 package com.example.cleanarchitecture.di.news
 
-import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.data.datastore.NewsDataStore
 import com.example.cleanarchitecture.data.datastore.cloud.CloudNewsDataStore
-import com.example.cleanarchitecture.data.datastore.cloud.client.NewsApiClient
-import com.example.cleanarchitecture.data.datastore.cloud.client.okhttp.BasicCredentialProvider
+import com.example.cleanarchitecture.data.datastore.cloud.NewsApi
 import com.example.cleanarchitecture.data.datastore.disk.NewsRoomDatabase
 import com.example.cleanarchitecture.data.datastore.disk.db.AppDatabase
 import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
@@ -12,22 +10,22 @@ import com.example.cleanarchitecture.data.repository.NewsRepositoryImpl
 import com.example.cleanarchitecture.domain.repository.NewsRepository
 import com.example.cleanarchitecture.domain.usecase.GetNewsListUseCase
 import com.example.cleanarchitecture.presentation.newslist.NewsListViewModel
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
 
 @Module
 object NewsModule {
 
     @NewsScope
     @Provides
-    fun provideNewsApiClient(moshi: Moshi, basicCredentialProvider: BasicCredentialProvider): NewsApiClient =
-            NewsApiClient(moshi, BuildConfig.BASE_URL, basicCredentialProvider)
+    fun provideNewsApi(retrofit: Retrofit): NewsApi =
+            retrofit.create(NewsApi::class.java)
 
     @NewsScope
     @Provides
-    fun provideCloudNewsDataStore(newsApiClient: NewsApiClient): NewsDataStore =
-            CloudNewsDataStore(newsApiClient)
+    fun provideCloudNewsDataStore(newsApi: NewsApi): NewsDataStore =
+            CloudNewsDataStore(newsApi)
 
     @NewsScope
     @Provides
