@@ -1,8 +1,5 @@
-package com.example.cleanarchitecture.data.datastore.disk
+package com.example.cleanarchitecture.data.datastore.database
 
-import com.example.cleanarchitecture.data.datastore.disk.db.AppDatabase
-import com.example.cleanarchitecture.data.datastore.disk.db.NewsDatabase
-import com.example.cleanarchitecture.data.datastore.disk.db.NewsEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 

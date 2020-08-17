@@ -1,6 +1,5 @@
-package com.example.cleanarchitecture.data.datastore.cloud
+package com.example.cleanarchitecture.data.datastore.remote
 
-import com.example.cleanarchitecture.data.entity.json.NewsResponseEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 

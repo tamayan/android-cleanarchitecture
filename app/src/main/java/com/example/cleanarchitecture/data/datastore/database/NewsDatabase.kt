@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.datastore.disk.db
+package com.example.cleanarchitecture.data.datastore.database
 
 import io.reactivex.Completable
 import io.reactivex.Single

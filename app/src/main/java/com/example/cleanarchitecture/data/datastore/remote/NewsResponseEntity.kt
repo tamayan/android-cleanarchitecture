@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.entity.json
+package com.example.cleanarchitecture.data.datastore.remote
 
 /**
  * Created by tamayan on 2017/11/23.

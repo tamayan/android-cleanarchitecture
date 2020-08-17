@@ -1,6 +1,5 @@
-package com.example.cleanarchitecture.data.datastore.cloud
+package com.example.cleanarchitecture.data.datastore.remote
 
-import com.example.cleanarchitecture.data.datastore.NewsDataStore
 import com.example.cleanarchitecture.domain.entity.News
 import io.reactivex.Observable
 import io.reactivex.Single
