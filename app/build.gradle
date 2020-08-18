@@ -146,7 +146,7 @@ dependencies {
 
     // Test Library
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
 
     // Android Test Library
