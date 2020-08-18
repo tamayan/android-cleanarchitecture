@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.database.room
+package com.example.cleanarchitecture.data.local.room
 
 import androidx.room.*
 import io.reactivex.Single

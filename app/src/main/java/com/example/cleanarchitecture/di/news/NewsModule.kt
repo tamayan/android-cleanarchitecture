@@ -1,9 +1,9 @@
 package com.example.cleanarchitecture.di.news
 
 import com.example.cleanarchitecture.data.NewsRepositoryImpl
-import com.example.cleanarchitecture.data.database.room.AppDatabase
-import com.example.cleanarchitecture.data.database.NewsDatabase
-import com.example.cleanarchitecture.data.database.room.NewsRoomDatabase
+import com.example.cleanarchitecture.data.local.room.AppDatabase
+import com.example.cleanarchitecture.data.local.NewsDatabase
+import com.example.cleanarchitecture.data.local.room.NewsRoomDatabase
 import com.example.cleanarchitecture.data.remote.retrofit.CloudNewsDataStore
 import com.example.cleanarchitecture.data.remote.retrofit.NewsApi
 import com.example.cleanarchitecture.data.remote.NewsDataStore

@@ -1,6 +1,6 @@
-package com.example.cleanarchitecture.data.database
+package com.example.cleanarchitecture.data.local
 
-import com.example.cleanarchitecture.data.database.room.NewsEntity
+import com.example.cleanarchitecture.data.local.room.NewsEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 

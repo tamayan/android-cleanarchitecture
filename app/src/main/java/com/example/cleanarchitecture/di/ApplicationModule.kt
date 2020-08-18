@@ -3,7 +3,7 @@ package com.example.cleanarchitecture.di
 import android.content.Context
 import androidx.room.Room
 import com.example.cleanarchitecture.BuildConfig
-import com.example.cleanarchitecture.data.database.room.AppDatabase
+import com.example.cleanarchitecture.data.local.room.AppDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
