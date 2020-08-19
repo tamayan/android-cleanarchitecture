@@ -21,8 +21,10 @@ class NewsRepository(private val newsDataStore: NewsDataStore,
             newsDatabase.find(id)
 
     override fun findAll(): Single<List<News>> =
-            newsDatabase.findAll()
-
-    override fun fetch(): Single<List<News>> =
-            newsDataStore.getNewsList()
+            newsDataStore
+                    .getNewsList()
+                    // APIからの取得に成功後DBに保存
+                    .doOnSuccess { newsDatabase.save(it) }
+                    // APIからの取得に失敗した場合、DBのNewsを返す
+                    .onErrorResumeNext { newsDatabase.findAll() }
 }

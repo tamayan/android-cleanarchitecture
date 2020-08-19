@@ -14,6 +14,4 @@ interface NewsRepositoryInterface {
     fun find(id: Int): Single<News>
 
     fun findAll(): Single<List<News>>
-
-    fun fetch(): Single<List<News>>
 }
