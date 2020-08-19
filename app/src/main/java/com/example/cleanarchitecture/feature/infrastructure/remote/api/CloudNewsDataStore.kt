@@ -1,7 +1,7 @@
-package com.example.cleanarchitecture.feature.infrastructure.remote.retrofit
+package com.example.cleanarchitecture.feature.infrastructure.remote.api
 
-import com.example.cleanarchitecture.feature.infrastructure.remote.NewsDataStore
 import com.example.cleanarchitecture.feature.domain.domain.news.News
+import com.example.cleanarchitecture.feature.infrastructure.remote.NewsDataStore
 import io.reactivex.Observable
 import io.reactivex.Single
 

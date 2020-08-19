@@ -7,8 +7,8 @@ import com.example.cleanarchitecture.feature.infrastructure.local.NewsDatabase
 import com.example.cleanarchitecture.feature.infrastructure.local.room.AppDatabase
 import com.example.cleanarchitecture.feature.infrastructure.local.room.NewsRoomDatabase
 import com.example.cleanarchitecture.feature.infrastructure.remote.NewsDataStore
-import com.example.cleanarchitecture.feature.infrastructure.remote.retrofit.CloudNewsDataStore
-import com.example.cleanarchitecture.feature.infrastructure.remote.retrofit.NewsApi
+import com.example.cleanarchitecture.feature.infrastructure.remote.api.CloudNewsDataStore
+import com.example.cleanarchitecture.feature.infrastructure.remote.api.NewsApi
 import com.example.cleanarchitecture.feature.ui.newslist.NewsListViewModel
 import dagger.Module
 import dagger.Provides

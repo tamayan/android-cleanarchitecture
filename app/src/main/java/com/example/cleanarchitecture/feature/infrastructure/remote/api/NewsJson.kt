@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.infrastructure.remote.retrofit
+package com.example.cleanarchitecture.feature.infrastructure.remote.api
 
 /**
  * Created by tamayan on 2017/11/23.
