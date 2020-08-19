@@ -7,13 +7,13 @@ import io.reactivex.Single
  * Created by tamayan on 2017/12/09.
  */
 
-interface NewsRepository {
+interface NewsRepositoryInterface {
 
-    fun getNewsList(): Single<List<News>>
+    fun save(newsList: List<News>): Completable
 
-    fun insertOrUpdate(newsList: List<News>): Completable
+    fun find(id: Int): Single<News>
 
-    fun fetch(id: Int): Single<News>
+    fun findAll(): Single<List<News>>
 
     fun fetch(): Single<List<News>>
 }

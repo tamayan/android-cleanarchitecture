@@ -1,7 +1,7 @@
 package com.example.cleanarchitecture.feature.di.news
 
 import com.example.cleanarchitecture.feature.domain.application.GetNewsListUseCase
-import com.example.cleanarchitecture.feature.domain.domain.news.NewsRepository
+import com.example.cleanarchitecture.feature.domain.domain.news.NewsRepositoryInterface
 import com.example.cleanarchitecture.feature.infrastructure.NewsRepositoryImpl
 import com.example.cleanarchitecture.feature.infrastructure.local.NewsDatabase
 import com.example.cleanarchitecture.feature.infrastructure.local.room.AppDatabase
@@ -34,12 +34,12 @@ object NewsModule {
 
     @NewsScope
     @Provides
-    fun provideNewsRepositoryImpl(newsDataStore: NewsDataStore, newsDatabase: NewsDatabase): NewsRepository =
+    fun provideNewsRepositoryImpl(newsDataStore: NewsDataStore, newsDatabase: NewsDatabase): NewsRepositoryInterface =
             NewsRepositoryImpl(newsDataStore, newsDatabase)
 
     @NewsScope
     @Provides
-    fun provideGetNewsListUseCase(newsRepository: NewsRepository): GetNewsListUseCase =
+    fun provideGetNewsListUseCase(newsRepository: NewsRepositoryInterface): GetNewsListUseCase =
             GetNewsListUseCase(newsRepository)
 
     @NewsScope

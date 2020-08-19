@@ -1,6 +1,6 @@
 package com.example.cleanarchitecture.feature.infrastructure.remote
 
-import com.example.cleanarchitecture.feature.domain.domain.news.News
+import com.example.cleanarchitecture.feature.infrastructure.remote.api.NewsJson
 import io.reactivex.Single
 
 /**
@@ -9,5 +9,5 @@ import io.reactivex.Single
 
 interface NewsDataStore {
 
-    fun getNewsList(): Single<List<News>>
+    fun getNewsList(): Single<List<NewsJson>>
 }
