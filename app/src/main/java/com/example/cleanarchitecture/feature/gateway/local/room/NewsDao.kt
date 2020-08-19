@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.infrastructure.local.room
+package com.example.cleanarchitecture.feature.gateway.local.room
 
 import androidx.room.*
 import io.reactivex.Single

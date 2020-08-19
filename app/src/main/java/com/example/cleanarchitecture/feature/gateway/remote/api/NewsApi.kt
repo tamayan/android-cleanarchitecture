@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.infrastructure.remote.api
+package com.example.cleanarchitecture.feature.gateway.remote.api
 
 import io.reactivex.Single
 import retrofit2.http.GET
