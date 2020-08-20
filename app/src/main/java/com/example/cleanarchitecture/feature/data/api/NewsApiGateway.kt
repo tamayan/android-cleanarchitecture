@@ -14,6 +14,9 @@ class NewsApiGateway(private val newsApi: NewsApi) : NewsApiGatewayInterface {
             newsApi
                     .fetch()
                     .flatMapObservable { Observable.fromIterable(it) }
-                    .map { News(it.id, it.title, it.text) }
+                    .map { toNews(it) }
                     .toList()
+
+    private fun toNews(newsJson: NewsJson): News =
+            News(newsJson.id, newsJson.title, newsJson.text)
 }

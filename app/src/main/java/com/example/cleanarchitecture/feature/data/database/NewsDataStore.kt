@@ -12,7 +12,7 @@ class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterfa
                 try {
                     appDatabase
                             .newsDao()
-                            .insertOrUpdate(NewsEntity(news.id, news.title, news.text))
+                            .insertOrUpdate(toNewsEntity(news))
                     emitter.onComplete()
                 } catch (e: Exception) {
                     emitter.onError(e)
@@ -25,7 +25,7 @@ class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterfa
                 try {
                     appDatabase
                             .newsDao()
-                            .insertOrUpdate(newsList.map { NewsEntity(it.id, it.title, it.text) })
+                            .insertOrUpdate(newsList.map { toNewsEntity(it) })
                     emitter.onComplete()
                 } catch (e: Exception) {
                     emitter.onError(e)
@@ -36,7 +36,7 @@ class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterfa
         appDatabase.runInTransaction {
             appDatabase
                     .newsDao()
-                    .deleteAndInsert(newsList.map { NewsEntity(it.id, it.title, it.text) })
+                    .deleteAndInsert(newsList.map { toNewsEntity(it) })
         }
     }
 
@@ -44,13 +44,19 @@ class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterfa
             appDatabase
                     .newsDao()
                     .find(id)
-                    .map { News(it.id, it.title, it.text) }
+                    .map { toNews(it) }
 
     override fun findAll(): Single<List<News>> =
             appDatabase
                     .newsDao()
                     .findAll()
                     .flatMapObservable { Observable.fromIterable(it) }
-                    .map { News(it.id, it.title, it.text) }
+                    .map { toNews(it) }
                     .toList()
+
+    private fun toNewsEntity(news: News): NewsEntity =
+            NewsEntity(news.id, news.title, news.text)
+
+    private fun toNews(newsEntity: NewsEntity): News =
+            News(newsEntity.id, newsEntity.title, newsEntity.text)
 }
