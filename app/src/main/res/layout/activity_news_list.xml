@@ -4,12 +4,12 @@
 
     <data>
 
-        <import type="com.example.cleanarchitecture.feature.ui.newslist.NewsListAdapter"/>
+        <import type="com.example.cleanarchitecture.ui.news.list.NewsListAdapter"/>
         <import type="android.view.View"/>
 
         <variable
                 name="viewModel"
-                type="com.example.cleanarchitecture.feature.ui.newslist.NewsListViewModel"/>
+                type="com.example.cleanarchitecture.ui.news.list.NewsListViewModel"/>
 
     </data>
 
