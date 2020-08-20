@@ -7,9 +7,10 @@ import com.example.cleanarchitecture.feature.data.api.NewsApiGatewayInterface
 import com.example.cleanarchitecture.feature.data.database.AppDatabase
 import com.example.cleanarchitecture.feature.data.database.NewsDataStore
 import com.example.cleanarchitecture.feature.data.database.NewsDataStoreInterface
-import com.example.cleanarchitecture.feature.domain.application.GetNewsListUseCase
+import com.example.cleanarchitecture.feature.domain.application.news.GetNewsListInteractor
 import com.example.cleanarchitecture.feature.domain.domain.news.NewsRepositoryInterface
 import com.example.cleanarchitecture.feature.ui.newslist.NewsListViewModel
+import com.example.cleanarchitecture.feature.usecase.news.list.GetNewsListUseCase
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -40,7 +41,7 @@ object NewsModule {
     @NewsScope
     @Provides
     fun provideGetNewsListUseCase(newsRepository: NewsRepositoryInterface): GetNewsListUseCase =
-            GetNewsListUseCase(newsRepository)
+            GetNewsListInteractor(newsRepository)
 
     @NewsScope
     @Provides

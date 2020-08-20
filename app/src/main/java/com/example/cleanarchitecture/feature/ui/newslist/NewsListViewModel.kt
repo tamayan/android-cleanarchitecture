@@ -3,7 +3,7 @@ package com.example.cleanarchitecture.feature.ui.newslist
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cleanarchitecture.feature.domain.application.GetNewsListUseCase
+import com.example.cleanarchitecture.feature.usecase.news.list.GetNewsListUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -24,18 +24,14 @@ class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : Vi
 
     fun load() {
         getNewsListUseCase
-                .execute(Unit)
+                .handle(Unit)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe { isLoading.value = true }
                 .doFinally { isLoading.value = false }
                 .subscribeBy(
-                        onSuccess = { newsList ->
-                            adapter.value?.update(
-                                    newsList.map {
-                                        NewsViewEntity(it.id, it.text)
-                                    }
-                            )
+                        onSuccess = {
+                            adapter.value?.update(it.newsListModel)
                         },
                         onError = {
                             it.printStackTrace()

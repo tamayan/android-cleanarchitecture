@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanarchitecture.databinding.ListItemNewsBinding
 import com.example.cleanarchitecture.feature.ui.newslist.NewsListAdapter.BindViewHolder
+import com.example.cleanarchitecture.feature.usecase.news.list.NewsListModel
 
 class NewsListAdapter : RecyclerView.Adapter<BindViewHolder>() {
 
-    private val list = ArrayList<NewsViewEntity>()
+    private val list = ArrayList<NewsListModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,7 +23,7 @@ class NewsListAdapter : RecyclerView.Adapter<BindViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
-    fun update(list: List<NewsViewEntity>) {
+    fun update(list: List<NewsListModel>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
