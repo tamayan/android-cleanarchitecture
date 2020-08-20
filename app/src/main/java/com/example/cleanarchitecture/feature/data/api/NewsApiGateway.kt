@@ -12,7 +12,7 @@ class NewsApiGateway(private val newsApi: NewsApi) : NewsApiGatewayInterface {
 
     override fun getNewsList(): Single<List<News>> =
             newsApi
-                    .getNewsList()
+                    .fetch()
                     .flatMapObservable { Observable.fromIterable(it) }
                     .map { News(it.id, it.title, it.text) }
                     .toList()
