@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.gateway.local.room
+package com.example.cleanarchitecture.feature.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,9 +1,9 @@
-package com.example.cleanarchitecture.feature.gateway
+package com.example.cleanarchitecture.feature.data
 
+import com.example.cleanarchitecture.feature.data.api.NewsApiGatewayInterface
+import com.example.cleanarchitecture.feature.data.database.NewsDataStoreInterface
 import com.example.cleanarchitecture.feature.domain.domain.news.News
 import com.example.cleanarchitecture.feature.domain.domain.news.NewsRepositoryInterface
-import com.example.cleanarchitecture.feature.gateway.local.NewsDatabase
-import com.example.cleanarchitecture.feature.gateway.remote.NewsDataStore
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -11,8 +11,8 @@ import io.reactivex.Single
  * Created by tamayan on 2017/12/09.
  */
 
-class NewsRepository(private val newsDataStore: NewsDataStore,
-                     private val newsDatabase: NewsDatabase) : NewsRepositoryInterface {
+class NewsRepository(private val newsDataStore: NewsApiGatewayInterface,
+                     private val newsDatabase: NewsDataStoreInterface) : NewsRepositoryInterface {
 
     override fun save(newsList: List<News>): Completable =
             newsDatabase.save(newsList)

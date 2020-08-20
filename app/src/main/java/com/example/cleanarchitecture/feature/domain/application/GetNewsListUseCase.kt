@@ -13,18 +13,6 @@ import io.reactivex.schedulers.Schedulers
 class GetNewsListUseCase(private val repository: NewsRepositoryInterface) : SingleUseCase<List<News>, Unit>(Schedulers.io()) {
 
     override fun buildSingle(params: Unit): Single<List<News>> {
-        return repository
-                // APIからNewsListを取得
-                .findAll()
-                // 保存or更新する
-                .flatMapCompletable {
-                    repository.save(it)
-                }
-                // Realmから取り出す
-                .andThen(repository.fetch())
-                // エラーの場合は、Realmから取り出す
-                .onErrorResumeNext {
-                    repository.fetch()
-                }
+        return repository.findAll()
     }
 }

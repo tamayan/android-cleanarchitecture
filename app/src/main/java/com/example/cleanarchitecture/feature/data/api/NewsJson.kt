@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.gateway.remote.api
+package com.example.cleanarchitecture.feature.data.api
 
 /**
  * Created by tamayan on 2017/11/23.

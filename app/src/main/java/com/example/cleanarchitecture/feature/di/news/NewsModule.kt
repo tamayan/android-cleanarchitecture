@@ -2,13 +2,13 @@ package com.example.cleanarchitecture.feature.di.news
 
 import com.example.cleanarchitecture.feature.domain.application.GetNewsListUseCase
 import com.example.cleanarchitecture.feature.domain.domain.news.NewsRepositoryInterface
-import com.example.cleanarchitecture.feature.gateway.NewsRepository
-import com.example.cleanarchitecture.feature.gateway.local.NewsDatabase
-import com.example.cleanarchitecture.feature.gateway.local.room.AppDatabase
-import com.example.cleanarchitecture.feature.gateway.local.room.NewsRoomDatabase
-import com.example.cleanarchitecture.feature.gateway.remote.NewsDataStore
-import com.example.cleanarchitecture.feature.gateway.remote.api.CloudNewsDataStore
-import com.example.cleanarchitecture.feature.gateway.remote.api.NewsApi
+import com.example.cleanarchitecture.feature.data.NewsRepository
+import com.example.cleanarchitecture.feature.data.database.NewsDataStoreInterface
+import com.example.cleanarchitecture.feature.data.database.AppDatabase
+import com.example.cleanarchitecture.feature.data.database.NewsDataStore
+import com.example.cleanarchitecture.feature.data.api.NewsApiGatewayInterface
+import com.example.cleanarchitecture.feature.data.api.NewsApiGateway
+import com.example.cleanarchitecture.feature.data.api.NewsApi
 import com.example.cleanarchitecture.feature.ui.newslist.NewsListViewModel
 import dagger.Module
 import dagger.Provides
@@ -24,17 +24,17 @@ object NewsModule {
 
     @NewsScope
     @Provides
-    fun provideCloudNewsDataStore(newsApi: NewsApi): NewsDataStore =
-            CloudNewsDataStore(newsApi)
+    fun provideCloudNewsDataStore(newsApi: NewsApi): NewsApiGatewayInterface =
+            NewsApiGateway(newsApi)
 
     @NewsScope
     @Provides
-    fun provideNewsRoomDatabase(appDatabase: AppDatabase): NewsDatabase =
-            NewsRoomDatabase(appDatabase)
+    fun provideNewsRoomDatabase(appDatabase: AppDatabase): NewsDataStoreInterface =
+            NewsDataStore(appDatabase)
 
     @NewsScope
     @Provides
-    fun provideNewsRepositoryImpl(newsDataStore: NewsDataStore, newsDatabase: NewsDatabase): NewsRepositoryInterface =
+    fun provideNewsRepositoryImpl(newsDataStore: NewsApiGatewayInterface, newsDatabase: NewsDataStoreInterface): NewsRepositoryInterface =
             NewsRepository(newsDataStore, newsDatabase)
 
     @NewsScope

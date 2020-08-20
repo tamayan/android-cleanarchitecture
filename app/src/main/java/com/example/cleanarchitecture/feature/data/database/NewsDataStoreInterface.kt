@@ -1,10 +1,10 @@
-package com.example.cleanarchitecture.feature.gateway.local
+package com.example.cleanarchitecture.feature.data.database
 
 import com.example.cleanarchitecture.feature.domain.domain.news.News
 import io.reactivex.Completable
 import io.reactivex.Single
 
-interface NewsDatabase {
+interface NewsDataStoreInterface {
 
     fun save(news: News): Completable
 

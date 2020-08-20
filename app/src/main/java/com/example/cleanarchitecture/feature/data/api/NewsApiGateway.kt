@@ -1,7 +1,6 @@
-package com.example.cleanarchitecture.feature.gateway.remote.api
+package com.example.cleanarchitecture.feature.data.api
 
 import com.example.cleanarchitecture.feature.domain.domain.news.News
-import com.example.cleanarchitecture.feature.gateway.remote.NewsDataStore
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -9,7 +8,7 @@ import io.reactivex.Single
  * Created by MSnowRobin016 on 2017/11/25.
  */
 
-class CloudNewsDataStore(private val newsApi: NewsApi) : NewsDataStore {
+class NewsApiGateway(private val newsApi: NewsApi) : NewsApiGatewayInterface {
 
     override fun getNewsList(): Single<List<News>> =
             newsApi

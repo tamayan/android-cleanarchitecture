@@ -1,12 +1,11 @@
-package com.example.cleanarchitecture.feature.gateway.local.room
+package com.example.cleanarchitecture.feature.data.database
 
 import com.example.cleanarchitecture.feature.domain.domain.news.News
-import com.example.cleanarchitecture.feature.gateway.local.NewsDatabase
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class NewsRoomDatabase(private val appDatabase: AppDatabase) : NewsDatabase {
+class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterface {
 
     override fun save(news: News): Completable =
             Completable.create { emitter ->

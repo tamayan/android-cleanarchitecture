@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.gateway.remote
+package com.example.cleanarchitecture.feature.data.api
 
 import com.example.cleanarchitecture.feature.domain.domain.news.News
 import io.reactivex.Single
@@ -7,7 +7,7 @@ import io.reactivex.Single
  * Created by tamayan on 2017/11/23.
  */
 
-interface NewsDataStore {
+interface NewsApiGatewayInterface {
 
     fun getNewsList(): Single<List<News>>
 }
