@@ -1,18 +1,16 @@
 package com.example.cleanarchitecture.data.database
 
 import com.example.cleanarchitecture.domain.domain.news.News
-import io.reactivex.Completable
-import io.reactivex.Single
 
 interface NewsDataStoreInterface {
 
-    fun save(news: News): Completable
+    suspend fun save(news: News)
 
-    fun save(newsList: List<News>): Completable
+    suspend fun save(newsList: List<News>)
 
-    fun replaceAll(newsList: List<News>)
+    suspend fun replaceAll(newsList: List<News>)
 
-    fun find(id: Int): Single<News>
+    suspend fun find(id: Int): News
 
-    fun findAll(): Single<List<News>>
+    suspend fun findAll(): List<News>
 }

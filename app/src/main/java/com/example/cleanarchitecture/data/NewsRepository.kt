@@ -4,8 +4,6 @@ import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
 import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
 import com.example.cleanarchitecture.domain.domain.news.News
 import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
-import io.reactivex.Completable
-import io.reactivex.Single
 
 /**
  * Created by tamayan on 2017/12/09.
@@ -14,17 +12,18 @@ import io.reactivex.Single
 class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                      private val dataStore: NewsDataStoreInterface) : NewsRepositoryInterface {
 
-    override fun save(newsList: List<News>): Completable =
+    override suspend fun save(newsList: List<News>) =
             dataStore.save(newsList)
 
-    override fun find(id: Int): Single<News> =
+    override suspend fun find(id: Int): News =
             dataStore.find(id)
 
-    override fun findAll(): Single<List<News>> =
-            apiGateway
-                    .getNewsList()
-                    // APIからの取得に成功後DBに保存
-                    .doOnSuccess { dataStore.save(it) }
-                    // APIからの取得に失敗した場合、DBのNewsを返す
-                    .onErrorResumeNext { dataStore.findAll() }
+    override suspend fun findAll(): List<News> {
+        val newsList = apiGateway.getNewsList()
+        // TODO: エラー時に取得可能かを検証
+        if (newsList.isEmpty())
+            return dataStore.findAll()
+        dataStore.save(newsList)
+        return newsList
+    }
 }

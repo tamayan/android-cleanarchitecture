@@ -1,31 +1,27 @@
 package com.example.cleanarchitecture.data.database
 
 import androidx.room.*
-import io.reactivex.Single
 
 @Dao
-interface NewsDao {
-
-    @Query(value = "SELECT * FROM news WHERE id = :id")
-    fun find(id: Int): Single<NewsEntity>
-
-    @Query(value = "SELECT * FROM news")
-    fun findAll(): Single<List<NewsEntity>>
+abstract class NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrUpdate(news: NewsEntity)
+    abstract suspend fun insertOrUpdate(news: NewsEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrUpdate(newsList: List<NewsEntity>)
+    abstract suspend fun insertOrUpdate(newsList: List<NewsEntity>)
 
-    @Delete
-    fun delete(news: NewsEntity)
+    @Query(value = "SELECT * FROM news WHERE id=:id")
+    abstract suspend fun find(id: Int): NewsEntity
+
+    @Query(value = "SELECT * FROM news ORDER BY id")
+    abstract suspend fun findAll(): List<NewsEntity>
 
     @Query(value = "DELETE FROM news")
-    fun deleteTable()
+    abstract suspend fun deleteTable()
 
     @Transaction
-    fun deleteAndInsert(newsList: List<NewsEntity>) {
+    open suspend fun deleteAndInsert(newsList: List<NewsEntity>) {
         deleteTable()
         insertOrUpdate(newsList)
     }

@@ -1,8 +1,6 @@
 package com.example.cleanarchitecture.data.api
 
 import com.example.cleanarchitecture.domain.domain.news.News
-import io.reactivex.Observable
-import io.reactivex.Single
 
 /**
  * Created by MSnowRobin016 on 2017/11/25.
@@ -10,13 +8,9 @@ import io.reactivex.Single
 
 class NewsApiGateway(private val newsApi: NewsApi) : NewsApiGatewayInterface {
 
-    override fun getNewsList(): Single<List<News>> =
-            newsApi
-                    .fetch()
-                    .flatMapObservable { Observable.fromIterable(it) }
-                    .map { toNews(it) }
-                    .toList()
+    override suspend fun getNewsList(): List<News> =
+            newsApi.fetch().map { mapToNews(it) }
 
-    private fun toNews(newsJson: NewsJson): News =
+    private fun mapToNews(newsJson: NewsJson): News =
             News(newsJson.id, newsJson.title, newsJson.text)
 }
