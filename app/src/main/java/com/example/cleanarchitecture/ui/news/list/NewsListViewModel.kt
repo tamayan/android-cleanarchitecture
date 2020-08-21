@@ -21,9 +21,11 @@ class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : Vi
     }
 
     fun load() = viewModelScope.launch {
+        isLoading.value = true
         val newsModels = withContext(Dispatchers.IO) {
             getNewsListUseCase.handle(GetNewsListRequest()).newsListModels
         }
         adapter.value?.update(newsModels)
+        isLoading.value = false
     }
 }
