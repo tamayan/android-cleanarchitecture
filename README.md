@@ -1,71 +1,26 @@
-# Android CleanArchitecture Sample
+# Android Clean Architecture Sample
 
-## Directory
+AndroidのClean Architectureサンプルです。
 
-```tree
-cleanarchitecture/
-├── data
-│   ├── datastore
-│   │   ├── cloud
-│   │   │   └── client
-│   │   │       ├── okhttp
-│   │   │       └── retrofit
-│   │   │           └── service
-│   │   └── disk
-│   ├── entity
-│   │   ├── json
-│   │   └── realm
-│   └── repository
-├── di
-│   ├── component
-│   └── module
-├── domain
-│   ├── entity
-│   ├── exception
-│   ├── repository
-│   └── usecase
-│       └── base
-├── presentation
-│   ├── entity
-│   ├── mvp
-│   │   ├── presenter
-│   │   └── view
-│   └── ui
-│       ├── activity
-│       └── adapter
-└── util
-```
+AACやAndroid Jetpackを参考に構成しています。
 
-## Library
+## ライブラリ
 
-- [Realm Java](https://github.com/realm/realm-java)
-- [Dagger2](https://github.com/google/dagger)
-- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-- [RxJava](https://github.com/ReactiveX/RxJava)
-- [RxKotlin](https://github.com/ReactiveX/RxKotlin)
-- [RxBinding](https://github.com/JakeWharton/RxBinding)
-- [Retrofit2](https://github.com/square/retrofit)
-- [Moshi](https://github.com/square/moshi)
-- [Timber](https://github.com/JakeWharton/timber)
+- DI (Dagger2)
+- DataBase (Room)
+- APIClient (Retrofit)
+- JSON Parser (Moshi)
+- Debug Log (Timber) 
 
-### Android Support Libraries
+## APIサーバ
 
-- Constraint Layout
-- Appcompat v7
-- Recyclerview v7
-- Support v4
+`mock/news.json` を `/news` で取得可能にする必要があります。
 
-## API
+local.propertiesを用意し、APIサーバへの接続先を追加してください。
 
-webサーバーを建てて、サーバーから `news-list.json` を受け取れるようにしてください。
-
-URLやBasic認証の情報を `gradle.properties` に追加してください。
-
-例)Localでデバッグする場合
-
-```gradle.properties
-## local
-local_base_url=http://localhost:8000/
-local_user_name=Basic ID
-local_password=Basic パスワード
+```local.properties
+# Local
+local_base_url=http://192.168.10.106:3000/
+local_user_name=
+local_password=
 ```
