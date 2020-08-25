@@ -4,8 +4,10 @@ import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
 import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
 import com.example.cleanarchitecture.domain.domain.news.News
 import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
-import io.reactivex.Completable
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 /**
  * Created by tamayan on 2017/12/09.
@@ -14,17 +16,21 @@ import io.reactivex.Single
 class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                      private val dataStore: NewsDataStoreInterface) : NewsRepositoryInterface {
 
-    override fun save(newsList: List<News>): Completable =
-            dataStore.save(newsList)
+    @ExperimentalCoroutinesApi
+    override suspend fun find(id: Int): Flow<News> =
+            dataStore.find(id).flowOn(Dispatchers.IO)
 
-    override fun find(id: Int): Single<News> =
-            dataStore.find(id)
-
-    override fun findAll(): Single<List<News>> =
-            apiGateway
-                    .getNewsList()
-                    // APIからの取得に成功後DBに保存
-                    .doOnSuccess { dataStore.save(it) }
-                    // APIからの取得に失敗した場合、DBのNewsを返す
-                    .onErrorResumeNext { dataStore.findAll() }
+    @ExperimentalCoroutinesApi
+    override suspend fun findAll(): Flow<List<News>> =
+            flow {
+                // APIから取得
+                val newsList = apiGateway.getNewsList()
+                // DBに保存
+                dataStore.save(newsList)
+                emit(newsList)
+            }.catch {
+                Timber.e(it)
+                // APIから取得に失敗した場合、DBから取得
+                emitAll(dataStore.findAll())
+            }.flowOn(Dispatchers.IO)
 }

@@ -1,7 +1,6 @@
 package com.example.cleanarchitecture.data.api
 
 import com.example.cleanarchitecture.domain.domain.news.News
-import io.reactivex.Single
 
 /**
  * Created by tamayan on 2017/11/23.
@@ -9,5 +8,5 @@ import io.reactivex.Single
 
 interface NewsApiGatewayInterface {
 
-    fun getNewsList(): Single<List<News>>
+    suspend fun getNewsList(): List<News>
 }

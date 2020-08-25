@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.data.api
 
-import io.reactivex.Single
 import retrofit2.http.GET
 
 /**
@@ -10,5 +9,5 @@ import retrofit2.http.GET
 interface NewsApi {
 
     @GET("news")
-    fun fetch(): Single<List<NewsJson>>
+    suspend fun fetch(): List<NewsJson>
 }

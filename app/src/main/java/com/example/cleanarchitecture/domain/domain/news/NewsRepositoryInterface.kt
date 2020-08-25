@@ -1,7 +1,6 @@
 package com.example.cleanarchitecture.domain.domain.news
 
-import io.reactivex.Completable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by tamayan on 2017/12/09.
@@ -9,9 +8,7 @@ import io.reactivex.Single
 
 interface NewsRepositoryInterface {
 
-    fun save(newsList: List<News>): Completable
+    suspend fun find(id: Int): Flow<News>
 
-    fun find(id: Int): Single<News>
-
-    fun findAll(): Single<List<News>>
+    suspend fun findAll(): Flow<List<News>>
 }

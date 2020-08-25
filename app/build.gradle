@@ -103,9 +103,8 @@ dependencies {
     // AndroidX - Room
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Dagger2
@@ -116,19 +115,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    // TODO: 要確認
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.0'
-
     // Retrofit
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
 
     // Moshi

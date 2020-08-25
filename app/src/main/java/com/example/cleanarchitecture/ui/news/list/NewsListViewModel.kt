@@ -3,12 +3,11 @@ package com.example.cleanarchitecture.ui.news.list
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.cleanarchitecture.usecase.news.list.GetNewsListRequest
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : ViewModel() {
 
@@ -16,27 +15,31 @@ class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : Vi
 
     val isLoading = MediatorLiveData<Boolean>()
 
-    private val compositeDisposable = CompositeDisposable()
+//    val newsList: LiveData<List<NewsListModel>> = getNewsListUseCase
+//            .handle(GetNewsListRequest())
+//            .newsListModels
+//            .asLiveData()
+
+//    // エラーハンドリング用のハンドラーを用意
+//    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+//        Timber.d(throwable)
+//        isLoading.value = false
+//    }
 
     init {
         adapter.value = NewsListAdapter()
     }
 
     fun load() {
-        getNewsListUseCase
-                .handle(Unit)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe { isLoading.value = true }
-                .doFinally { isLoading.value = false }
-                .subscribeBy(
-                        onSuccess = {
-                            adapter.value?.update(it.newsListModel)
-                        },
-                        onError = {
-                            it.printStackTrace()
-                        }
-                )
-                .addTo(compositeDisposable)
+        viewModelScope.launch {
+            isLoading.value = true
+            getNewsListUseCase
+                    .handle(GetNewsListRequest())
+                    .newsListModels
+                    .collect {
+                        adapter.value?.update(it)
+                        isLoading.value = false
+                    }
+        }
     }
 }

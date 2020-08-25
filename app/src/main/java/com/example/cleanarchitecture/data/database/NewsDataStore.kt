@@ -1,62 +1,27 @@
 package com.example.cleanarchitecture.data.database
 
+import androidx.room.withTransaction
 import com.example.cleanarchitecture.domain.domain.news.News
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class NewsDataStore(private val appDatabase: AppDatabase) : NewsDataStoreInterface {
+class NewsDataStore(private val appDatabase: AppDatabase,
+                    private val newsDao: NewsDao = appDatabase.newsDao()) : NewsDataStoreInterface {
 
-    override fun save(news: News): Completable =
-            Completable.create { emitter ->
-                try {
-                    appDatabase
-                            .newsDao()
-                            .insertOrUpdate(toNewsEntity(news))
-                    emitter.onComplete()
-                } catch (e: Exception) {
-                    emitter.onError(e)
-                }
+    override suspend fun find(id: Int): Flow<News> =
+            newsDao.find(id).map { it.toNews() }
+
+    override suspend fun findAll(): Flow<List<News>> =
+            newsDao.findAll().map { it.map { entity -> entity.toNews() } }
+
+    override suspend fun save(newsList: List<News>) =
+            appDatabase.withTransaction {
+                newsDao.insertOrUpdate(newsList.map { it.toEntity() })
             }
-
-
-    override fun save(newsList: List<News>): Completable =
-            Completable.create { emitter ->
-                try {
-                    appDatabase
-                            .newsDao()
-                            .insertOrUpdate(newsList.map { toNewsEntity(it) })
-                    emitter.onComplete()
-                } catch (e: Exception) {
-                    emitter.onError(e)
-                }
-            }
-
-    override fun replaceAll(newsList: List<News>) {
-        appDatabase.runInTransaction {
-            appDatabase
-                    .newsDao()
-                    .deleteAndInsert(newsList.map { toNewsEntity(it) })
-        }
-    }
-
-    override fun find(id: Int): Single<News> =
-            appDatabase
-                    .newsDao()
-                    .find(id)
-                    .map { toNews(it) }
-
-    override fun findAll(): Single<List<News>> =
-            appDatabase
-                    .newsDao()
-                    .findAll()
-                    .flatMapObservable { Observable.fromIterable(it) }
-                    .map { toNews(it) }
-                    .toList()
-
-    private fun toNewsEntity(news: News): NewsEntity =
-            NewsEntity(news.id, news.title, news.text)
-
-    private fun toNews(newsEntity: NewsEntity): News =
-            News(newsEntity.id, newsEntity.title, newsEntity.text)
 }
+
+private fun NewsEntity.toNews(): News =
+        News(id, title, text)
+
+private fun News.toEntity(): NewsEntity =
+        NewsEntity(id, title, text)

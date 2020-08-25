@@ -1,18 +1,13 @@
 package com.example.cleanarchitecture.data.database
 
 import com.example.cleanarchitecture.domain.domain.news.News
-import io.reactivex.Completable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 interface NewsDataStoreInterface {
 
-    fun save(news: News): Completable
+    suspend fun find(id: Int): Flow<News>
 
-    fun save(newsList: List<News>): Completable
+    suspend fun findAll(): Flow<List<News>>
 
-    fun replaceAll(newsList: List<News>)
-
-    fun find(id: Int): Single<News>
-
-    fun findAll(): Single<List<News>>
+    suspend fun save(newsList: List<News>)
 }

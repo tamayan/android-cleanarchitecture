@@ -1,31 +1,28 @@
 package com.example.cleanarchitecture.data.database
 
 import androidx.room.*
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NewsDao {
+abstract class NewsDao {
 
     @Query(value = "SELECT * FROM news WHERE id = :id")
-    fun find(id: Int): Single<NewsEntity>
+    abstract fun find(id: Int): Flow<NewsEntity>
 
-    @Query(value = "SELECT * FROM news")
-    fun findAll(): Single<List<NewsEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrUpdate(news: NewsEntity)
+    @Query(value = "SELECT * FROM news ORDER BY id")
+    abstract fun findAll(): Flow<List<NewsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrUpdate(newsList: List<NewsEntity>)
+    abstract suspend fun insertOrUpdate(news: NewsEntity)
 
-    @Delete
-    fun delete(news: NewsEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertOrUpdate(newsList: List<NewsEntity>)
 
     @Query(value = "DELETE FROM news")
-    fun deleteTable()
+    abstract suspend fun deleteTable()
 
     @Transaction
-    fun deleteAndInsert(newsList: List<NewsEntity>) {
+    open suspend fun deleteAndInsert(newsList: List<NewsEntity>) {
         deleteTable()
         insertOrUpdate(newsList)
     }

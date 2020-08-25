@@ -17,18 +17,20 @@ class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefresh
     lateinit var newsListViewModel: NewsListViewModel
 
     private val binding: ActivityNewsListBinding by lazy {
-        DataBindingUtil
-                .setContentView<ActivityNewsListBinding>(this, R.layout.activity_news_list)
+        DataBindingUtil.setContentView(this, R.layout.activity_news_list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-        binding.swipeRefreshLayout.setOnRefreshListener(this)
+
         binding.viewModel = newsListViewModel
+        binding.swipeRefreshLayout.setOnRefreshListener(this)
+
         newsListViewModel.isLoading.observe(this, Observer<Boolean> {
             swipeRefreshLayout.isRefreshing = it as Boolean
         })
+
         newsListViewModel.load()
     }
 
