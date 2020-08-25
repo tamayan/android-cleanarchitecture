@@ -1,29 +1,27 @@
 package com.example.cleanarchitecture.data.database
 
+import androidx.room.withTransaction
 import com.example.cleanarchitecture.domain.domain.news.News
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class NewsDataStore(appDatabase: AppDatabase) : NewsDataStoreInterface {
+class NewsDataStore(private val appDatabase: AppDatabase,
+                    private val newsDao: NewsDao = appDatabase.newsDao()) : NewsDataStoreInterface {
 
-    private val newsDao = appDatabase.newsDao()
+    override suspend fun find(id: Int): Flow<News> =
+            newsDao.find(id).map { it.toNews() }
 
-    override suspend fun save(news: News) =
-            newsDao.insertOrUpdate(mapToNewsEntity(news))
+    override suspend fun findAll(): Flow<List<News>> =
+            newsDao.findAll().map { it.map { entity -> entity.toNews() } }
 
     override suspend fun save(newsList: List<News>) =
-            newsDao.insertOrUpdate(newsList.map { mapToNewsEntity(it) })
-
-    override suspend fun replaceAll(newsList: List<News>) =
-            newsDao.deleteAndInsert(newsList.map { mapToNewsEntity(it) })
-
-    override suspend fun find(id: Int): News =
-            mapToNews(newsDao.find(id))
-
-    override suspend fun findAll(): List<News> =
-            newsDao.findAll().map { mapToNews(it) }
-
-    private fun mapToNewsEntity(news: News): NewsEntity =
-            NewsEntity(news.id, news.title, news.text)
-
-    private fun mapToNews(newsEntity: NewsEntity): News =
-            News(newsEntity.id, newsEntity.title, newsEntity.text)
+            appDatabase.withTransaction {
+                newsDao.insertOrUpdate(newsList.map { it.toEntity() })
+            }
 }
+
+private fun NewsEntity.toNews(): News =
+        News(id, title, text)
+
+private fun News.toEntity(): NewsEntity =
+        NewsEntity(id, title, text)

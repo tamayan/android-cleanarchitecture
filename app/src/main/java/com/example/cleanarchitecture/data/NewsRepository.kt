@@ -4,6 +4,12 @@ import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
 import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
 import com.example.cleanarchitecture.domain.domain.news.News
 import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
  * Created by tamayan on 2017/12/09.
@@ -12,19 +18,20 @@ import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
 class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                      private val dataStore: NewsDataStoreInterface) : NewsRepositoryInterface {
 
-    override suspend fun save(newsList: List<News>) =
-            dataStore.save(newsList)
+    @ExperimentalCoroutinesApi
+    override suspend fun find(id: Int): Flow<News> =
+            dataStore.find(id).flowOn(Dispatchers.IO)
 
-    override suspend fun find(id: Int): News =
-            dataStore.find(id)
-
-    override suspend fun findAll(): List<News> {
-        return try {
-            val newsList = apiGateway.getNewsList()
-            dataStore.save(newsList)
-            newsList
-        } catch (exception: Exception) {
-            dataStore.findAll()
-        }
-    }
+    @ExperimentalCoroutinesApi
+    override suspend fun findAll(): Flow<List<News>> =
+            flow {
+                // APIから取得
+                val newsList = apiGateway.getNewsList()
+                // DBに保存
+                dataStore.save(newsList)
+                emit(newsList)
+            }.catch {
+                // APIから取得に失敗した場合、DBから取得
+                dataStore.findAll()
+            }.flowOn(Dispatchers.IO)
 }
