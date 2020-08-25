@@ -38,8 +38,8 @@ class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : Vi
                     .newsListModels
                     .collect {
                         adapter.value?.update(it)
+                        isLoading.value = false
                     }
-            isLoading.value = false
         }
     }
 }

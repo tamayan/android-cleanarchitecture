@@ -6,10 +6,8 @@ import com.example.cleanarchitecture.domain.domain.news.News
 import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 /**
  * Created by tamayan on 2017/12/09.
@@ -31,7 +29,8 @@ class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                 dataStore.save(newsList)
                 emit(newsList)
             }.catch {
+                Timber.e(it)
                 // APIから取得に失敗した場合、DBから取得
-                dataStore.findAll()
+                emitAll(dataStore.findAll())
             }.flowOn(Dispatchers.IO)
 }
