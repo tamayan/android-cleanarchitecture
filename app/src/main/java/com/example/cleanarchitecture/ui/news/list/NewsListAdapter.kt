@@ -9,17 +9,13 @@ import com.example.cleanarchitecture.databinding.ListItemNewsBinding
 import com.example.cleanarchitecture.ui.news.list.NewsListAdapter.ViewHolder
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 
-class NewsListAdapter(private val viewModel: NewsListViewModel) :
-        ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback()) {
+class NewsListAdapter(private val viewModel: NewsListViewModel) : ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback()) {
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        viewHolder.bind(viewModel, item)
-    }
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
+            viewHolder.bind(viewModel, getItem(position))
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            ViewHolder.from(parent)
 
     class ViewHolder private constructor(private val binding: ListItemNewsBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -27,7 +23,6 @@ class NewsListAdapter(private val viewModel: NewsListViewModel) :
         fun bind(viewModel: NewsListViewModel, item: NewsListModel) {
             binding.news = item
             binding.viewModel = viewModel
-            binding.executePendingBindings()
         }
 
         companion object {
@@ -43,11 +38,9 @@ class NewsListAdapter(private val viewModel: NewsListViewModel) :
 
 class NewsDiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
 
-    override fun areItemsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {
-        return oldItem.id == newItem.id
-    }
+    override fun areItemsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean =
+            oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {
-        return oldItem == newItem
-    }
+    override fun areContentsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean =
+            oldItem == newItem
 }
