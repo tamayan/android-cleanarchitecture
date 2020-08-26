@@ -2,33 +2,52 @@ package com.example.cleanarchitecture.ui.news.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanarchitecture.databinding.ListItemNewsBinding
-import com.example.cleanarchitecture.ui.news.list.NewsListAdapter.BindViewHolder
+import com.example.cleanarchitecture.ui.news.list.NewsListAdapter.ViewHolder
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 
-class NewsListAdapter : RecyclerView.Adapter<BindViewHolder>() {
+class NewsListAdapter(private val viewModel: NewsListViewModel) :
+        ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback()) {
 
-    private val list = ArrayList<NewsListModel>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val listItemNewsBinding = ListItemNewsBinding.inflate(layoutInflater, parent, false)
-        return BindViewHolder(listItemNewsBinding)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        viewHolder.bind(viewModel, item)
     }
 
-    override fun onBindViewHolder(viewHolder: BindViewHolder, position: Int) {
-        viewHolder.listItemNewsBinding.news = list[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int = list.size
+    class ViewHolder private constructor(private val binding: ListItemNewsBinding) :
+            RecyclerView.ViewHolder(binding.root) {
 
-    fun update(list: List<NewsListModel>) {
-        this.list.clear()
-        this.list.addAll(list)
-        notifyDataSetChanged()
+        fun bind(viewModel: NewsListViewModel, item: NewsListModel) {
+            binding.news = item
+            binding.viewModel = viewModel
+            binding.executePendingBindings()
+        }
+
+        companion object {
+
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemNewsBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
+    }
+}
+
+class NewsDiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
+
+    override fun areItemsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    class BindViewHolder(val listItemNewsBinding: ListItemNewsBinding) :
-            RecyclerView.ViewHolder(listItemNewsBinding.root)
+    override fun areContentsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {
+        return oldItem == newItem
+    }
 }
