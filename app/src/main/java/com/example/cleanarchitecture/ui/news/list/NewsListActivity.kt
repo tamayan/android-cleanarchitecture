@@ -26,6 +26,10 @@ class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefresh
         binding.lifecycleOwner = this
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.newsList.adapter = NewsListAdapter(viewModel)
+
+        viewModel.items.observe(this, {
+            (binding.newsList.adapter as NewsListAdapter).submitList(it)
+        })
     }
 
     override fun onRefresh() {

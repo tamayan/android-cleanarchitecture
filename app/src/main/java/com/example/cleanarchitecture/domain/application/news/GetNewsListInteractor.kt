@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 
 class GetNewsListInteractor(private val repository: NewsRepositoryInterface) : GetNewsListUseCase {
 
-    override suspend fun handle(request: GetNewsListRequest): GetNewsListResponse =
+    override fun handle(request: GetNewsListRequest): GetNewsListResponse =
             GetNewsListResponse(repository.findAll().map { it.map { it.toModel() } })
 }
 

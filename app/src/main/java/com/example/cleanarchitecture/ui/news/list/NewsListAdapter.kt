@@ -2,7 +2,6 @@ package com.example.cleanarchitecture.ui.news.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -44,11 +43,4 @@ class NewsDiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
 
     override fun areContentsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean =
             oldItem == newItem
-}
-
-@BindingAdapter(value = ["app:items"])
-fun setItems(recyclerView: RecyclerView, items: List<NewsListModel>?) {
-    items?.let {
-        (recyclerView.adapter as NewsListAdapter).submitList(items)
-    }
 }
