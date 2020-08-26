@@ -12,7 +12,7 @@ import javax.inject.Inject
 class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var newsListViewModel: NewsListViewModel
+    lateinit var viewModel: NewsListViewModel
 
     private val binding: ActivityNewsListBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_news_list)
@@ -22,10 +22,10 @@ class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefresh
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
 
-        binding.viewModel = newsListViewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.swipeRefreshLayout.setOnRefreshListener(this)
-        binding.newsList.adapter = NewsListAdapter(newsListViewModel)
+        binding.newsList.adapter = NewsListAdapter(viewModel)
     }
 
     override fun onRefresh() {
