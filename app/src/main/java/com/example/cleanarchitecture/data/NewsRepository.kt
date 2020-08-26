@@ -4,6 +4,7 @@ import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
 import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
 import com.example.cleanarchitecture.domain.domain.news.News
 import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -14,11 +15,12 @@ import timber.log.Timber
  */
 
 class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
-                     private val dataStore: NewsDataStoreInterface) : NewsRepositoryInterface {
+                     private val dataStore: NewsDataStoreInterface,
+                     private val dispatcher: CoroutineDispatcher = Dispatchers.IO) : NewsRepositoryInterface {
 
     @ExperimentalCoroutinesApi
     override suspend fun find(id: Int): Flow<News> =
-            dataStore.find(id).flowOn(Dispatchers.IO)
+            dataStore.find(id).flowOn(dispatcher)
 
     @ExperimentalCoroutinesApi
     override suspend fun findAll(): Flow<List<News>> =
@@ -32,5 +34,5 @@ class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                 Timber.e(it)
                 // APIから取得に失敗した場合、DBから取得
                 emitAll(dataStore.findAll())
-            }.flowOn(Dispatchers.IO)
+            }.flowOn(dispatcher)
 }
