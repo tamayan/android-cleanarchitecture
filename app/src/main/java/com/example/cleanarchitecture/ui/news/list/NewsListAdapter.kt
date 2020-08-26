@@ -9,20 +9,24 @@ import com.example.cleanarchitecture.databinding.ListItemNewsBinding
 import com.example.cleanarchitecture.ui.news.list.NewsListAdapter.ViewHolder
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 
-class NewsListAdapter(private val viewModel: NewsListViewModel) : ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback()) {
-
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
-            viewHolder.bind(viewModel, getItem(position))
+class NewsListAdapter(private val viewModel: NewsListViewModel) :
+        ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder.from(parent)
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
+            viewHolder.bind(viewModel, getItem(position))
 
     class ViewHolder private constructor(private val binding: ListItemNewsBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: NewsListViewModel, item: NewsListModel) {
-            binding.news = item
-            binding.viewModel = viewModel
+            binding.run {
+                news = item
+                this.viewModel = viewModel
+                executePendingBindings()
+            }
         }
 
         companion object {
@@ -36,7 +40,7 @@ class NewsListAdapter(private val viewModel: NewsListViewModel) : ListAdapter<Ne
     }
 }
 
-class NewsDiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
+object NewsDiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
 
     override fun areItemsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean =
             oldItem.id == newItem.id
