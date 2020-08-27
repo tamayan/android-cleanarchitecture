@@ -2,7 +2,7 @@ package com.example.cleanarchitecture.di
 
 import com.example.cleanarchitecture.di.news.NewsModule
 import com.example.cleanarchitecture.di.news.NewsScope
-import com.example.cleanarchitecture.ui.news.list.NewsListActivity
+import com.example.cleanarchitecture.ui.news.NewsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,5 +15,5 @@ abstract class ActivityModule {
 
     @NewsScope
     @ContributesAndroidInjector(modules = [NewsModule::class])
-    abstract fun contributeNewsListActivity(): NewsListActivity
+    abstract fun contributeNewsListActivity(): NewsActivity
 }
