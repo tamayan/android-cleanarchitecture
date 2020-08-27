@@ -1,17 +1,37 @@
 package com.example.cleanarchitecture.ui.news.list
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListRequest
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListUseCase
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class NewsListViewModel(getNewsListUseCase: GetNewsListUseCase) : ViewModel() {
+class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : ViewModel() {
 
-    val items: LiveData<List<NewsListModel>> =
+    private val _items = MutableLiveData<List<NewsListModel>>()
+    val items: LiveData<List<NewsListModel>> = _items
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
+
+    init {
+        refresh()
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _loading.value = true
             getNewsListUseCase
                     .handle(GetNewsListRequest())
                     .newsListModels
-                    .asLiveData()
+                    .collect {
+                        _items.value = it
+                    }
+            _loading.value = false
+        }
+    }
 }
