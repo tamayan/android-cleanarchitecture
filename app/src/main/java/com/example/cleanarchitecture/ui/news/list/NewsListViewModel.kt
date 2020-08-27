@@ -1,45 +1,37 @@
 package com.example.cleanarchitecture.ui.news.list
 
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListRequest
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListUseCase
+import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsListViewModel(private val getNewsListUseCase: GetNewsListUseCase) : ViewModel() {
 
-    val adapter = MutableLiveData<NewsListAdapter>()
+    private val _items = MutableLiveData<List<NewsListModel>>()
+    val items: LiveData<List<NewsListModel>> = _items
 
-    val isLoading = MediatorLiveData<Boolean>()
-
-//    val newsList: LiveData<List<NewsListModel>> = getNewsListUseCase
-//            .handle(GetNewsListRequest())
-//            .newsListModels
-//            .asLiveData()
-
-//    // エラーハンドリング用のハンドラーを用意
-//    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-//        Timber.d(throwable)
-//        isLoading.value = false
-//    }
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
 
     init {
-        adapter.value = NewsListAdapter()
+        refresh()
     }
 
-    fun load() {
+    fun refresh() {
         viewModelScope.launch {
-            isLoading.value = true
+            _loading.value = true
             getNewsListUseCase
                     .handle(GetNewsListRequest())
                     .newsListModels
                     .collect {
-                        adapter.value?.update(it)
-                        isLoading.value = false
+                        _items.value = it
                     }
+            _loading.value = false
         }
     }
 }

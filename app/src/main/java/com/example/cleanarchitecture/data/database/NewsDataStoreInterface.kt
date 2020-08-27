@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsDataStoreInterface {
 
-    suspend fun find(id: Int): Flow<News>
+    fun find(id: Int): Flow<News>
 
-    suspend fun findAll(): Flow<List<News>>
+    fun findAll(): Flow<List<News>>
 
     suspend fun save(newsList: List<News>)
 }

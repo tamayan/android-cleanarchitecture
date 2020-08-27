@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.example.cleanarchitecture.R
-import kotlinx.android.synthetic.main.list_item_news.*
+import kotlinx.android.synthetic.main.activity_news_detail.*
 
 /**
  * Created by MSnowRobin016 on 2017/12/27.
@@ -17,8 +17,8 @@ class NewsDetailActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
 
-        idTextView.text = intent.getIntExtra(KEY_ID, 0).toString()
-        titleTextView.text = intent.getStringExtra(KEY_TITLE)
+        id_text.text = intent.getIntExtra(KEY_ID, 0).toString()
+        title_text.text = intent.getStringExtra(KEY_TITLE)
     }
 
     companion object {

@@ -6,6 +6,11 @@
         <variable
                 name="news"
                 type="com.example.cleanarchitecture.usecase.news.list.NewsListModel"/>
+
+        <variable
+                name="viewModel"
+                type="com.example.cleanarchitecture.ui.news.list.NewsListViewModel"/>
+
     </data>
 
     <RelativeLayout
@@ -15,7 +20,7 @@
             android:padding="@dimen/space_small">
 
         <TextView
-                android:id="@+id/idTextView"
+                android:id="@+id/id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_dark"
@@ -23,11 +28,11 @@
                 android:textSize="@dimen/font_normal"/>
 
         <TextView
-                android:id="@+id/titleTextView"
+                android:id="@+id/title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_small"
-                android:layout_toEndOf="@+id/idTextView"
+                android:layout_toEndOf="@+id/id_text"
                 android:textColor="@color/gray_dark"
                 android:text="@{String.valueOf(news.title)}"
                 android:textSize="@dimen/font_normal"/>
