@@ -23,7 +23,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.newsList.adapter = NewsListAdapter(viewModel)
+        binding.newsList.adapter = NewsListAdapter(viewModel, this)
 
         viewModel.items.observe(this, {
             (binding.newsList.adapter as NewsListAdapter).submitList(it)
