@@ -2,14 +2,13 @@ package com.example.cleanarchitecture.ui.news.list
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.ActivityNewsListBinding
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 
-class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+class NewsListActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModel: NewsListViewModel
@@ -22,16 +21,12 @@ class NewsListActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefresh
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
 
-        binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.swipeRefreshLayout.setOnRefreshListener(this)
+        binding.viewModel = viewModel
         binding.newsList.adapter = NewsListAdapter(viewModel)
 
         viewModel.items.observe(this, {
             (binding.newsList.adapter as NewsListAdapter).submitList(it)
         })
-    }
-
-    override fun onRefresh() {
     }
 }
