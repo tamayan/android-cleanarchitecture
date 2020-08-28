@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentNewsListBinding
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class NewsListFragment : DaggerFragment() {
+@AndroidEntryPoint
+class NewsListFragment : Fragment(R.layout.fragment_news_list) {
 
-    @Inject
-    lateinit var viewModel: NewsListViewModel
+    private val viewModel: NewsListViewModel by viewModels()
 
     private lateinit var binding: FragmentNewsListBinding
 
