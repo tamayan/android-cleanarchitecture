@@ -18,9 +18,8 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
     private lateinit var binding: FragmentNewsListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentNewsListBinding.inflate(inflater, container, false).apply {
-            viewModel = viewModel
-        }
+        binding = FragmentNewsListBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         return binding.root
     }
 

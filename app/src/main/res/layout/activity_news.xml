@@ -8,7 +8,7 @@
         android:background="@android:color/background_light"
         tools:context="com.example.cleanarchitecture.ui.news.NewsActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
             android:id="@+id/news_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
