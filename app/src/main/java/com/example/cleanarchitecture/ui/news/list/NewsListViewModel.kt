@@ -19,6 +19,9 @@ class NewsListViewModel @ViewModelInject constructor(private val getNewsListUseC
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
+    private val _clickId = MutableLiveData<Int>()
+    val clickId: LiveData<Int> = _clickId
+
     init {
         refresh()
     }
@@ -34,5 +37,9 @@ class NewsListViewModel @ViewModelInject constructor(private val getNewsListUseC
                     }
             _loading.value = false
         }
+    }
+
+    fun onClickItem(id: Int) {
+        _clickId.value = id
     }
 }

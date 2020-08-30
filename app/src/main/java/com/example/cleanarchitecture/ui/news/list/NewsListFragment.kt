@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentNewsListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,11 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list) {
 
         viewModel.items.observe(viewLifecycleOwner, {
             (binding.newsList.adapter as NewsListAdapter).submitList(it)
+        })
+
+        viewModel.clickId.observe(viewLifecycleOwner, {
+            val action = NewsListFragmentDirections.actionNewsListToNewsDetail(it)
+            findNavController().navigate(action)
         })
     }
 }

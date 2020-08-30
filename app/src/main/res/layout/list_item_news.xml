@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/list_item_news_background"
-            android:padding="@dimen/space_small">
+            android:padding="@dimen/space_small"
+            android:onClick="@{() -> viewModel.onClickItem(news.id)}">
 
         <TextView
                 android:id="@+id/id_text"

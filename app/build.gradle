@@ -2,7 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+// Dagger Hilt
 apply plugin: 'dagger.hilt.android.plugin'
+// AndroidX Navigation safeargs
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 def getLocalProperties(String key) {
     Properties properties = new Properties()
