@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.map
 class NewsDataStore(private val appDatabase: AppDatabase,
                     private val newsDao: NewsDao = appDatabase.newsDao()) : NewsDataStoreInterface {
 
-    override fun find(id: Int): Flow<News> =
-            newsDao.find(id).map { it.toNews() }
+    override suspend fun find(id: Int): News =
+            newsDao.find(id).toNews()
 
     override fun findAll(): Flow<List<News>> =
             newsDao.findAll().map { it.map { entity -> entity.toNews() } }

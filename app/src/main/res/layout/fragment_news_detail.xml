@@ -3,9 +3,9 @@
 
     <data>
 
-        <!--        <variable-->
-        <!--                name="news"-->
-        <!--                type="com.example.cleanarchitecture.usecase.news.list.NewsListModel"/>-->
+        <variable
+                name="newsDetail"
+                type="com.example.cleanarchitecture.usecase.news.detail.GetNewsDetailResponse"/>
 
     </data>
 
@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_dark"
-                android:text="hoge"
+                android:text="@{String.valueOf(newsDetail.id)}"
                 android:textSize="@dimen/font_normal"/>
 
         <TextView
@@ -28,10 +28,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_small"
-                android:layout_toEndOf="@+id/id_text"
+                android:layout_toEndOf="@id/id_text"
                 android:textColor="@color/gray_dark"
-                android:text="fuga"
+                android:text="@{newsDetail.title}"
                 android:textSize="@dimen/font_normal"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_small"
+                android:layout_toEndOf="@id/title_text"
+                android:textColor="@color/gray_dark"
+                android:text="@{newsDetail.text}"
+                android:textSize="@dimen/font_normal"/>
+
 
     </RelativeLayout>
 

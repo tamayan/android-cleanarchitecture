@@ -14,9 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewsListFragment : Fragment(R.layout.fragment_news_list) {
 
-    private val viewModel: NewsListViewModel by viewModels()
-
     private lateinit var binding: FragmentNewsListBinding
+
+    private val viewModel: NewsListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentNewsListBinding.inflate(inflater, container, false)

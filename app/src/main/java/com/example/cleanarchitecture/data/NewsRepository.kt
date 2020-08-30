@@ -17,8 +17,7 @@ import kotlinx.coroutines.flow.flow
 class NewsRepository(private val apiGateway: NewsApiGatewayInterface,
                      private val dataStore: NewsDataStoreInterface) : NewsRepositoryInterface {
 
-    @ExperimentalCoroutinesApi
-    override fun find(id: Int): Flow<News> =
+    override suspend fun find(id: Int): News =
             dataStore.find(id)
 
     @ExperimentalCoroutinesApi

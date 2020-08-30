@@ -11,7 +11,9 @@ import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsListViewModel @ViewModelInject constructor(private val getNewsListUseCase: GetNewsListUseCase) : ViewModel() {
+class NewsListViewModel @ViewModelInject constructor(
+        private val getNewsListUseCase: GetNewsListUseCase
+) : ViewModel() {
 
     private val _items = MutableLiveData<List<NewsListModel>>()
     val items: LiveData<List<NewsListModel>> = _items

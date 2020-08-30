@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepositoryInterface {
 
-    fun find(id: Int): Flow<News>
+    suspend fun find(id: Int): News
 
     fun findAll(): Flow<List<News>>
 }
