@@ -23,11 +23,11 @@ class NewsListAdapter(private val viewModel: NewsListViewModel,
     class ViewHolder private constructor(private val binding: ListItemNewsBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: NewsListViewModel, item: NewsListModel, lifecycleOwner: LifecycleOwner) {
-            binding.run {
-                this.viewModel = viewModel
+        fun bind(viewModel: NewsListViewModel, news: NewsListModel, lifecycleOwner: LifecycleOwner) {
+            binding.apply {
                 this.lifecycleOwner = lifecycleOwner
-                news = item
+                this.viewModel = viewModel
+                this.news = news
                 executePendingBindings()
             }
         }

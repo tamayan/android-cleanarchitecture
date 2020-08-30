@@ -16,7 +16,7 @@
 
         <!-- News List -->
         <activity
-                android:name="com.example.cleanarchitecture.ui.news.list.NewsListActivity"
+                android:name="com.example.cleanarchitecture.ui.news.NewsActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

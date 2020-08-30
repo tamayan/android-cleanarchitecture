@@ -1,13 +1,15 @@
 package com.example.cleanarchitecture.di
 
-import android.content.Context
-import androidx.room.Room
 import com.example.cleanarchitecture.BuildConfig
-import com.example.cleanarchitecture.data.database.AppDatabase
+import com.example.cleanarchitecture.data.api.NewsApi
+import com.example.cleanarchitecture.data.api.NewsApiGateway
+import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,12 +17,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-/**
- * Created by MSnowRobin016 on 2017/12/28.
- */
-
 @Module
-object ApplicationModule {
+@InstallIn(ApplicationComponent::class)
+object NetworkModule {
 
     @Singleton
     @Provides
@@ -60,11 +59,11 @@ object ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRoom(context: Context): AppDatabase =
-            Room
-                    .databaseBuilder(
-                            context,
-                            AppDatabase::class.java,
-                            BuildConfig.ROOM_DATABASE_NAME)
-                    .build()
+    fun provideNewsApi(retrofit: Retrofit): NewsApi =
+            retrofit.create(NewsApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideCloudNewsDataStore(newsApi: NewsApi): NewsApiGatewayInterface =
+            NewsApiGateway(newsApi)
 }

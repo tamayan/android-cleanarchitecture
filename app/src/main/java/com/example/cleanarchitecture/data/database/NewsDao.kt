@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 abstract class NewsDao {
 
     @Query(value = "SELECT * FROM news WHERE id = :id")
-    abstract fun find(id: Int): Flow<NewsEntity>
+    abstract suspend fun find(id: Int): NewsEntity
 
     @Query(value = "SELECT * FROM news ORDER BY id")
     abstract fun findAll(): Flow<List<NewsEntity>>

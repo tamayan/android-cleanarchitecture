@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="android.view.View"/>
-
         <variable
                 name="viewModel"
                 type="com.example.cleanarchitecture.ui.news.list.NewsListViewModel"/>
@@ -13,7 +11,6 @@
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:refreshing="@{viewModel.loading}"

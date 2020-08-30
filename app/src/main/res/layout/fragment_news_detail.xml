@@ -4,12 +4,8 @@
     <data>
 
         <variable
-                name="news"
-                type="com.example.cleanarchitecture.usecase.news.list.NewsListModel"/>
-
-        <variable
-                name="viewModel"
-                type="com.example.cleanarchitecture.ui.news.list.NewsListViewModel"/>
+                name="newsDetail"
+                type="com.example.cleanarchitecture.usecase.news.detail.GetNewsDetailResponse"/>
 
     </data>
 
@@ -17,15 +13,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/list_item_news_background"
-            android:padding="@dimen/space_small"
-            android:onClick="@{() -> viewModel.onClickItem(news.id)}">
+            android:padding="@dimen/space_small">
 
         <TextView
                 android:id="@+id/id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_dark"
-                android:text="@{String.valueOf(news.id)}"
+                android:text="@{String.valueOf(newsDetail.id)}"
                 android:textSize="@dimen/font_normal"/>
 
         <TextView
@@ -33,10 +28,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_small"
-                android:layout_toEndOf="@+id/id_text"
+                android:layout_toEndOf="@id/id_text"
                 android:textColor="@color/gray_dark"
-                android:text="@{news.title}"
+                android:text="@{newsDetail.title}"
                 android:textSize="@dimen/font_normal"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_small"
+                android:layout_toEndOf="@id/title_text"
+                android:textColor="@color/gray_dark"
+                android:text="@{newsDetail.text}"
+                android:textSize="@dimen/font_normal"/>
+
 
     </RelativeLayout>
 
