@@ -25,10 +25,10 @@
             android:name="com.example.cleanarchitecture.ui.news.detail.NewsDetailFragment"
             tools:layout="@layout/fragment_news_detail">
 
-        <argument android:name="id" app:argType="integer"/>
-
-        <action android:id="@+id/action_news_detail_to_news_list"
-                app:destination="@id/news_list"/>
+        <argument
+                android:name="id"
+                app:argType="integer"
+                app:nullable="false"/>
 
     </fragment>
 
