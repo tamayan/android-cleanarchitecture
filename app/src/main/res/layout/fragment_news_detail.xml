@@ -12,7 +12,6 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/list_item_news_background"
             android:padding="@dimen/space_small">
 
         <TextView
@@ -41,7 +40,6 @@
                 android:textColor="@color/gray_dark"
                 android:text="@{newsDetail.text}"
                 android:textSize="@dimen/font_normal"/>
-
 
     </RelativeLayout>
 
