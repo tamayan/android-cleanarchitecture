@@ -6,7 +6,7 @@
 
     <application
             android:name="com.example.cleanarchitecture.ui.MyApplication"
-            android:allowBackup="true"
+            android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,7 +14,6 @@
             android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
 
-        <!-- News List -->
         <activity
                 android:name="com.example.cleanarchitecture.ui.news.NewsActivity"
                 android:screenOrientation="portrait">
@@ -23,11 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <!-- News Detail -->
-        <activity
-                android:name="com.example.cleanarchitecture.ui.news.detail.NewsDetailActivity"
-                android:screenOrientation="portrait"/>
 
     </application>
 

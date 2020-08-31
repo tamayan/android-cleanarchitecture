@@ -2,7 +2,6 @@ package com.example.cleanarchitecture.ui.news.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,22 +9,20 @@ import com.example.cleanarchitecture.databinding.ListItemNewsBinding
 import com.example.cleanarchitecture.ui.news.list.NewsListAdapter.ViewHolder
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 
-class NewsListAdapter(private val viewModel: NewsListViewModel,
-                      private val lifecycleOwner: LifecycleOwner
-) : ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback) {
+class NewsListAdapter(private val viewModel: NewsListViewModel) :
+        ListAdapter<NewsListModel, ViewHolder>(NewsDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder.from(parent)
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
-            viewHolder.bind(viewModel, getItem(position), lifecycleOwner)
+            viewHolder.bind(viewModel, getItem(position))
 
     class ViewHolder private constructor(private val binding: ListItemNewsBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: NewsListViewModel, news: NewsListModel, lifecycleOwner: LifecycleOwner) {
+        fun bind(viewModel: NewsListViewModel, news: NewsListModel) {
             binding.apply {
-                this.lifecycleOwner = lifecycleOwner
                 this.viewModel = viewModel
                 this.news = news
                 executePendingBindings()

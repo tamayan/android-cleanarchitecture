@@ -28,7 +28,10 @@ class NewsDetailFragment : Fragment(R.layout.fragment_news_detail) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        setupNewsDetail()
+    }
 
+    private fun setupNewsDetail() {
         viewModel.find(args.id)
         viewModel.newsDetail.observe(viewLifecycleOwner, {
             binding.newsDetail = it
