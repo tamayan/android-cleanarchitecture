@@ -1,23 +1,16 @@
 package com.example.cleanarchitecture.ui.news.list
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.cleanarchitecture.ui.Event
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListRequest
 import com.example.cleanarchitecture.usecase.news.list.GetNewsListUseCase
 import com.example.cleanarchitecture.usecase.news.list.NewsListModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class NewsListViewModel @ViewModelInject constructor(
         private val getNewsListUseCase: GetNewsListUseCase
 ) : ViewModel() {
-
-    private val _items = MutableLiveData<List<NewsListModel>>()
-    val items: LiveData<List<NewsListModel>> = _items
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -26,21 +19,22 @@ class NewsListViewModel @ViewModelInject constructor(
     private val _clickId = MutableLiveData<Event<Int>>()
     val clickId: LiveData<Event<Int>> = _clickId
 
-    init {
-        refresh()
-    }
-
-    fun refresh() {
-        viewModelScope.launch {
+    private val _refresh = MutableLiveData(Unit)
+    val items: LiveData<List<NewsListModel>> = _refresh.switchMap {
+        liveData {
             _loading.value = true
             getNewsListUseCase
                     .handle(GetNewsListRequest())
                     .newsListModels
                     .collect {
-                        _items.value = it
+                        emit(it)
                     }
             _loading.value = false
         }
+    }
+
+    fun refresh() {
+        _refresh.value = Unit
     }
 
     fun onClickItem(id: Int) {
