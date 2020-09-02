@@ -2,16 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            app:startDestination="@id/news_list">
+            app:startDestination="@id/videos">
 
     <fragment
-            android:id="@+id/news_list"
-            android:name="com.example.cleanarchitecture.ui.news.list.NewsListFragment"
-            tools:layout="@layout/fragment_news_list">
+            android:id="@+id/videos"
+            android:name="com.example.cleanarchitecture.ui.video.list.VideosFragment"
+            tools:layout="@layout/fragment_videos">
 
         <action
-                android:id="@+id/action_news_list_to_news_detail"
-                app:destination="@id/news_detail"
+                android:id="@+id/action_videos_to_video_info"
+                app:destination="@id/video_info"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -20,13 +20,13 @@
     </fragment>
 
     <fragment
-            android:id="@+id/news_detail"
-            android:name="com.example.cleanarchitecture.ui.news.detail.NewsDetailFragment"
-            tools:layout="@layout/fragment_news_detail">
+            android:id="@+id/video_info"
+            android:name="com.example.cleanarchitecture.ui.video.info.VideoInfoFragment"
+            tools:layout="@layout/fragment_video_info">
 
         <argument
                 android:name="id"
-                app:argType="integer"
+                app:argType="string"
                 app:nullable="false"/>
 
     </fragment>

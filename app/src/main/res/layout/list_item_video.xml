@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+                name="video"
+                type="com.example.cleanarchitecture.usecase.video.list.VideoModel"/>
+
+        <variable
+                name="viewModel"
+                type="com.example.cleanarchitecture.ui.video.list.VideosViewModel"/>
+
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_video_background"
+            android:padding="@dimen/space_small"
+            android:onClick="@{() -> viewModel.onClickItem(video.id)}">
+
+        <TextView
+                android:id="@+id/id_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_dark"
+                android:text="@{video.id}"
+                android:textSize="@dimen/font_normal"/>
+
+        <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_small"
+                android:layout_toEndOf="@+id/id_text"
+                android:textColor="@color/gray_dark"
+                android:text="@{video.title}"
+                android:textSize="@dimen/font_normal"/>
+
+    </RelativeLayout>
+
+</layout>
