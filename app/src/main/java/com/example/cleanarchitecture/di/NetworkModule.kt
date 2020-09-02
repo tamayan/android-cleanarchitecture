@@ -1,9 +1,9 @@
 package com.example.cleanarchitecture.di
 
 import com.example.cleanarchitecture.BuildConfig
-import com.example.cleanarchitecture.data.api.NewsApi
-import com.example.cleanarchitecture.data.api.NewsApiGateway
-import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
+import com.example.cleanarchitecture.data.api.VideoApi
+import com.example.cleanarchitecture.data.api.VideoApiGateway
+import com.example.cleanarchitecture.data.api.VideoApiGatewayInterface
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -59,11 +59,11 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNewsApi(retrofit: Retrofit): NewsApi =
-            retrofit.create(NewsApi::class.java)
+    fun provideVideoApi(retrofit: Retrofit): VideoApi =
+            retrofit.create(VideoApi::class.java)
 
     @Singleton
     @Provides
-    fun provideCloudNewsDataStore(newsApi: NewsApi): NewsApiGatewayInterface =
-            NewsApiGateway(newsApi)
+    fun provideVideoApiGateway(api: VideoApi): VideoApiGatewayInterface =
+            VideoApiGateway(api)
 }

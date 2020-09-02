@@ -1,9 +1,9 @@
 package com.example.cleanarchitecture.di
 
-import com.example.cleanarchitecture.data.NewsRepository
-import com.example.cleanarchitecture.data.api.NewsApiGatewayInterface
-import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
-import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
+import com.example.cleanarchitecture.data.VideoRepository
+import com.example.cleanarchitecture.data.api.VideoApiGatewayInterface
+import com.example.cleanarchitecture.data.database.VideoDataStoreInterface
+import com.example.cleanarchitecture.domain.domain.video.VideoRepositoryInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +16,6 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideNewsRepositoryImpl(apiGateway: NewsApiGatewayInterface, dataStore: NewsDataStoreInterface): NewsRepositoryInterface =
-            NewsRepository(apiGateway, dataStore)
+    fun provideVideoRepository(apiGateway: VideoApiGatewayInterface, dataStore: VideoDataStoreInterface): VideoRepositoryInterface =
+            VideoRepository(apiGateway, dataStore)
 }

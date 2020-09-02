@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.data.database.AppDatabase
-import com.example.cleanarchitecture.data.database.NewsDataStore
-import com.example.cleanarchitecture.data.database.NewsDataStoreInterface
+import com.example.cleanarchitecture.data.database.VideoDataStore
+import com.example.cleanarchitecture.data.database.VideoDataStoreInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideRoom(@ApplicationContext context: Context): AppDatabase =
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
             Room
                     .databaseBuilder(
                             context,
@@ -29,6 +29,6 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideNewsRoomDatabase(appDatabase: AppDatabase): NewsDataStoreInterface =
-            NewsDataStore(appDatabase)
+    fun provideVideoDataStore(appDatabase: AppDatabase): VideoDataStoreInterface =
+            VideoDataStore(appDatabase)
 }

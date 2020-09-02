@@ -27,6 +27,8 @@ android {
 
         // Room Database Name
         buildConfigField "String", "ROOM_DATABASE_NAME", "\"AppDatabase.db\""
+        buildConfigField "String", "YOUTUBE_IMAGE_URL", "\"http://img.youtube.com/vi/\""
+        buildConfigField "String", "YOUTUBE_THUMBNAIL_NAME", "\"maxresdefault.jpg\""
     }
 
     buildTypes {

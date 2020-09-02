@@ -14,13 +14,13 @@ AACやAndroid Jetpackを参考に構成しています。
 
 ## APIサーバ
 
-`mock/news.json` を `/news` で取得可能にする必要があります。
+`mock/video.json` を `/video` で取得可能にする必要があります。
 
 local.propertiesを用意し、APIサーバへの接続先を追加してください。
 
 ```local.properties
 # Local
-local_base_url=http://192.168.10.106:3000/
+local_base_url=http://hogehoge:3000/
 local_user_name=
 local_password=
 ```

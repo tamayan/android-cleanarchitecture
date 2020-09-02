@@ -1,0 +1,43 @@
+package com.example.cleanarchitecture.ui.video.list
+
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
+import com.example.cleanarchitecture.ui.Event
+import com.example.cleanarchitecture.usecase.video.list.GetVideosRequest
+import com.example.cleanarchitecture.usecase.video.list.GetVideosUseCase
+import com.example.cleanarchitecture.usecase.video.list.VideoModel
+import kotlinx.coroutines.flow.collect
+
+class VideosViewModel @ViewModelInject constructor(
+        private val getVideosUseCase: GetVideosUseCase
+) : ViewModel() {
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
+
+    // LiveDataでイベントを1度だけ実行したい場合に、Eventでラップすることで値を取り出したことがあるかを判定する
+    private val _clickId = MutableLiveData<Event<String>>()
+    val clickId: LiveData<Event<String>> = _clickId
+
+    private val _refresh = MutableLiveData(Unit)
+    val items: LiveData<List<VideoModel>> = _refresh.switchMap {
+        liveData {
+            _loading.value = true
+            getVideosUseCase
+                    .handle(GetVideosRequest())
+                    .videos
+                    .collect {
+                        emit(it)
+                    }
+            _loading.value = false
+        }
+    }
+
+    fun refresh() {
+        _refresh.value = Unit
+    }
+
+    fun onClickItem(id: String) {
+        _clickId.value = Event(id)
+    }
+}

@@ -1,10 +1,10 @@
 package com.example.cleanarchitecture.di
 
-import com.example.cleanarchitecture.domain.application.news.GetNewsDetailInteractor
-import com.example.cleanarchitecture.domain.application.news.GetNewsListInteractor
-import com.example.cleanarchitecture.domain.domain.news.NewsRepositoryInterface
-import com.example.cleanarchitecture.usecase.news.detail.GetNewsDetailUseCase
-import com.example.cleanarchitecture.usecase.news.list.GetNewsListUseCase
+import com.example.cleanarchitecture.domain.application.video.GetVideoInfoInteractor
+import com.example.cleanarchitecture.domain.application.video.GetVideoListInteractor
+import com.example.cleanarchitecture.domain.domain.video.VideoRepositoryInterface
+import com.example.cleanarchitecture.usecase.video.info.GetVideoInfoUseCase
+import com.example.cleanarchitecture.usecase.video.list.GetVideosUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,11 +17,11 @@ object UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetNewsDetailUseCase(newsRepository: NewsRepositoryInterface): GetNewsDetailUseCase =
-            GetNewsDetailInteractor(newsRepository)
+    fun provideGetVideoInfoInteractor(repository: VideoRepositoryInterface): GetVideoInfoUseCase =
+            GetVideoInfoInteractor(repository)
 
     @Singleton
     @Provides
-    fun provideGetNewsListUseCase(newsRepository: NewsRepositoryInterface): GetNewsListUseCase =
-            GetNewsListInteractor(newsRepository)
+    fun provideGetVideoListInteractor(repository: VideoRepositoryInterface): GetVideosUseCase =
+            GetVideoListInteractor(repository)
 }
