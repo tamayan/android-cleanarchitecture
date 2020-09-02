@@ -1,7 +1,6 @@
 package com.example.cleanarchitecture.data.database
 
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class VideoDao {
@@ -10,7 +9,7 @@ abstract class VideoDao {
     abstract suspend fun find(id: String): VideoEntity
 
     @Query(value = "SELECT * FROM video")
-    abstract fun findAll(): Flow<List<VideoEntity>>
+    abstract suspend fun findAll(): List<VideoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertOrUpdate(videos: List<VideoEntity>)

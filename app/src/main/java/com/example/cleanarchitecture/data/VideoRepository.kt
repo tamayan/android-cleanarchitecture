@@ -4,10 +4,8 @@ import com.example.cleanarchitecture.data.api.VideoApiGatewayInterface
 import com.example.cleanarchitecture.data.database.VideoDataStoreInterface
 import com.example.cleanarchitecture.domain.domain.video.Video
 import com.example.cleanarchitecture.domain.domain.video.VideoRepositoryInterface
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 
 class VideoRepository(private val apiGateway: VideoApiGatewayInterface,
@@ -16,7 +14,6 @@ class VideoRepository(private val apiGateway: VideoApiGatewayInterface,
     override suspend fun find(id: String): Video =
             dataStore.find(id)
 
-    @ExperimentalCoroutinesApi
     override fun findAll(): Flow<List<Video>> =
             flow {
                 // APIから取得
@@ -26,6 +23,6 @@ class VideoRepository(private val apiGateway: VideoApiGatewayInterface,
                 emit(videos)
             }.catch {
                 // APIから取得に失敗した場合、DBから取得
-                emitAll(dataStore.findAll())
+                emit(dataStore.findAll())
             }
 }
