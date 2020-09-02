@@ -6,7 +6,10 @@ import com.example.cleanarchitecture.ui.Event
 import com.example.cleanarchitecture.usecase.video.list.GetVideosRequest
 import com.example.cleanarchitecture.usecase.video.list.GetVideosUseCase
 import com.example.cleanarchitecture.usecase.video.list.VideoModel
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 
 class VideosViewModel @ViewModelInject constructor(
         private val getVideosUseCase: GetVideosUseCase
@@ -21,16 +24,13 @@ class VideosViewModel @ViewModelInject constructor(
 
     private val _refresh = MutableLiveData(Unit)
     val items: LiveData<List<VideoModel>> = _refresh.switchMap {
-        liveData {
-            _loading.value = true
-            getVideosUseCase
-                    .handle(GetVideosRequest())
-                    .videos
-                    .collect {
-                        emit(it)
-                    }
-            _loading.value = false
-        }
+        getVideosUseCase
+                .handle(GetVideosRequest())
+                .videos
+                .flowOn(Dispatchers.IO) // 上部のスレッドを切り替え
+                .onStart { _loading.value = true }
+                .onCompletion { _loading.value = false }
+                .asLiveData()
     }
 
     fun refresh() {

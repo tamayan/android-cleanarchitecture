@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.databinding.ListItemVideoBinding
 import com.example.cleanarchitecture.ui.video.list.VideosAdapter.ViewHolder
 import com.example.cleanarchitecture.usecase.video.list.VideoModel
@@ -25,6 +27,7 @@ class VideosAdapter(private val viewModel: VideosViewModel) :
             binding.apply {
                 this.viewModel = viewModel
                 this.video = video
+                this.thumbnail.load(BuildConfig.THUMBNAIL_URL.format(video.id))
                 executePendingBindings()
             }
         }
