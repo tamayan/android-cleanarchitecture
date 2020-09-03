@@ -115,11 +115,6 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // AndroidX - Paging
-    def paging_version = "2.1.2"
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    testImplementation "androidx.paging:paging-common:$paging_version"
-
     // AndroidX - Hilt
     def hilt_version = "1.0.0-alpha02"
     implementation "androidx.hilt:hilt-common:$hilt_version"
@@ -145,7 +140,7 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // Material
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
 
     // Coil
     implementation 'io.coil-kt:coil:1.0.0-rc1'
