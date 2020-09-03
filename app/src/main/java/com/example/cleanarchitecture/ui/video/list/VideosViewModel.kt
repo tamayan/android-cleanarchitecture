@@ -6,8 +6,6 @@ import com.example.cleanarchitecture.ui.Event
 import com.example.cleanarchitecture.usecase.video.list.GetVideosRequest
 import com.example.cleanarchitecture.usecase.video.list.GetVideosUseCase
 import com.example.cleanarchitecture.usecase.video.list.VideoModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 
@@ -27,7 +25,6 @@ class VideosViewModel @ViewModelInject constructor(
         getVideosUseCase
                 .handle(GetVideosRequest())
                 .videos
-                .flowOn(Dispatchers.IO) // 上部のスレッドを切り替え
                 .onStart { _loading.value = true }
                 .onCompletion { _loading.value = false }
                 .asLiveData()
