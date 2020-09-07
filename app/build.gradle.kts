@@ -22,6 +22,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cleanarchitecture"
+
         minSdkVersion(24)
         targetSdkVersion(30)
 
@@ -46,9 +47,7 @@ android {
 
         getByName("debug") {
             isMinifyEnabled = false
-            isDebuggable = true
             applicationIdSuffix = ".debug"
-            initWith(getByName("debug"))
 
             buildConfigField("String", "BASE_URL", "\"${getLocalProperties("debug_base_url")}\"")
             buildConfigField("String", "BASIC_USER_NAME", "\"${getLocalProperties("debug_user_name")}\"")
