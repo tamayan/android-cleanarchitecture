@@ -5,7 +5,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-
     // Dagger Hilt
     id("dagger.hilt.android.plugin")
     // AndroidX Navigation safeargs
@@ -64,6 +63,15 @@ dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
 
     val kotlinVersion by extra("1.4.0")
+    val navVersion by extra("2.3.0")
+    val lifecycleVersion by extra("2.2.0")
+    val roomVersion by extra("2.2.5")
+    val hiltVersion by extra("1.0.0-alpha02")
+    val daggerVersion by extra("2.28")
+    val daggerAndroidVersion by extra("2.27")
+    val daggerHiltVersion by extra("2.28-alpha")
+    val retrofitVersion by extra("2.9.0")
+    val moshiVersion by extra("1.9.3")
 
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
@@ -78,52 +86,43 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
 
     // AndroidX - Navigation
-    val navVersion by extra("2.3.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // AndroidX - Lifecycle
-    val lifecycleVersion by extra("2.2.0")
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
     // AndroidX - Room
-    val roomVersion by extra("2.2.5")
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
     // AndroidX - Hilt
-    val hiltVersion by extra("1.0.0-alpha02")
     implementation("androidx.hilt:hilt-common:$hiltVersion")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion")
     kapt("androidx.hilt:hilt-compiler:$hiltVersion")
 
     // Dagger
-    val daggerVersion by extra("2.28")
     implementation("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 
     // Dagger - Android
-    val daggerAndroidVersion by extra("2.27")
     api("com.google.dagger:dagger-android:$daggerAndroidVersion")
     api("com.google.dagger:dagger-android-support:$daggerAndroidVersion")
     kapt("com.google.dagger:dagger-android-processor:$daggerAndroidVersion")
 
     // Dagger - Hilt Support
-    val daggerHiltVersion by extra("2.28-alpha")
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
 
     // Retrofit
-    val retrofitVersion by extra("2.9.0")
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:retrofit-mock:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
 
     // Moshi
-    val moshiVersion by extra("1.9.3")
     implementation("com.squareup.moshi:moshi:$moshiVersion")
     implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     implementation("com.squareup.moshi:moshi-adapters:$moshiVersion")
