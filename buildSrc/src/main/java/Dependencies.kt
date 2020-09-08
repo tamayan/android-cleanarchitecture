@@ -1,9 +1,35 @@
-const val kotlinVersion = "1.4.0"
+object Packages {
+    const val applicationId = "com.example.cleanarchitecture"
+    const val debugNameSuffix = ".debug"
+}
+
+object Versions {
+    const val kotlin = "1.4.0"
+
+    const val compileSdk = 30
+    const val targetSdk = compileSdk
+    const val minSdk = 24
+
+    private const val versionMajor = 1
+    private const val versionMinor = 1
+    private const val versionPatch = 0
+    private const val versionOffset = 0
+
+    val versionCode = ((1 + versionMajor) * 10000 + versionMinor * 100 + versionPatch) * 100 + versionOffset
+    val versionName = "$versionMajor.$versionMinor.$versionPatch"
+}
 
 object Libs {
 
+    object GradlePlugin {
+        const val android = "com.android.tools.build:gradle:4.0.1"
+        const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${AndroidX.Navigation.version}"
+        const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:${Dagger.Hilt.version}"
+    }
+
     object Kotlin {
-        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     }
 
     object AndroidX {
@@ -15,7 +41,7 @@ object Libs {
         const val testing = "androidx.arch.core:core-testing:2.1.0"
 
         object Navigation {
-            private const val version = "2.3.0"
+            const val version = "2.3.0"
             const val ui = "androidx.navigation:navigation-ui-ktx:$version"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
         }
@@ -51,7 +77,7 @@ object Libs {
 
     object Dagger {
         object Hilt {
-            private const val version = "2.28-alpha"
+            const val version = "2.28-alpha"
             const val android = "com.google.dagger:hilt-android:$version"
             const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         }

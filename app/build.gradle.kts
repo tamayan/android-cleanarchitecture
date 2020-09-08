@@ -1,32 +1,24 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    // Dagger Hilt
-    id("dagger.hilt.android.plugin")
-    // AndroidX Navigation safeargs
-    id("androidx.navigation.safeargs.kotlin")
-}
 
-fun getLocalProperties(key: String): String {
-    return gradleLocalProperties(rootDir).getProperty(key)
+    id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion = "30.0.1"
+
+    compileSdkVersion(Versions.compileSdk)
 
     defaultConfig {
-        applicationId = "com.example.cleanarchitecture"
+        targetSdkVersion(Versions.targetSdk)
+        minSdkVersion(Versions.minSdk)
 
-        minSdkVersion(24)
-        targetSdkVersion(30)
-
-        versionCode = 1
-        versionName = "1.0.0"
+        applicationId = Packages.applicationId
+        versionCode = Versions.versionCode
+        versionName = Versions.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "ROOM_DATABASE_NAME", "\"AppDatabase.db\"")
@@ -45,8 +37,9 @@ android {
         }
 
         getByName("debug") {
+            isDebuggable = true
             isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
+            applicationIdSuffix = Packages.debugNameSuffix
 
             buildConfigField("String", "BASE_URL", "\"${getLocalProperties("debug_base_url")}\"")
             buildConfigField("String", "BASIC_USER_NAME", "\"${getLocalProperties("debug_user_name")}\"")
@@ -117,11 +110,6 @@ dependencies {
     androidTestImplementation(Libs.AndroidX.Test.espresso)
 }
 
-kapt {
-    generateStubs = true
-}
-
-repositories {
-    jcenter()
-    maven(url = "https://maven.google.com")
+fun getLocalProperties(key: String): String {
+    return com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir).getProperty(key)
 }
