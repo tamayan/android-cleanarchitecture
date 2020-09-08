@@ -62,86 +62,59 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
 
-    val kotlinVersion by extra("1.4.0")
-    val navVersion by extra("2.3.0")
-    val lifecycleVersion by extra("2.2.0")
-    val roomVersion by extra("2.2.5")
-    val hiltVersion by extra("1.0.0-alpha02")
-    val daggerHiltVersion by extra("2.28-alpha")
-    val retrofitVersion by extra("2.9.0")
-    val moshiVersion by extra("1.9.3")
+    implementation(Libs.Kotlin.stdLib)
 
-    // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation(Libs.AndroidX.coreKtx)
+    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.constraintLayout)
+    implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.AndroidX.recyclerView)
 
-    // AndroidX
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation(Libs.AndroidX.Navigation.ui)
+    implementation(Libs.AndroidX.Navigation.fragment)
 
-    // AndroidX - Layout
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation(Libs.AndroidX.Lifecycle.extensions)
+    implementation(Libs.AndroidX.Lifecycle.viewModel)
+    implementation(Libs.AndroidX.Lifecycle.liveData)
 
-    // AndroidX - Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation(Libs.AndroidX.Room.runtime)
+    implementation(Libs.AndroidX.Room.ktx)
+    kapt(Libs.AndroidX.Room.compiler)
 
-    // AndroidX - Lifecycle
-    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation(Libs.AndroidX.Hilt.common)
+    implementation(Libs.AndroidX.Hilt.viewModel)
+    kapt(Libs.AndroidX.Hilt.compiler)
 
-    // AndroidX - Room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation(Libs.Dagger.Hilt.android)
+    kapt(Libs.Dagger.Hilt.compiler)
 
-    // AndroidX - Hilt
-    implementation("androidx.hilt:hilt-common:$hiltVersion")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion")
-    kapt("androidx.hilt:hilt-compiler:$hiltVersion")
+    implementation(Libs.Retrofit.core)
+    implementation(Libs.Retrofit.mock)
+    implementation(Libs.Retrofit.convertor)
 
-    // Dagger - Hilt Support
-    implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
+    implementation(Libs.Moshi.core)
+    implementation(Libs.Moshi.kotlin)
+    implementation(Libs.Moshi.adapters)
+    kapt(Libs.Moshi.codegen)
 
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:retrofit-mock:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
+    implementation(Libs.Material.material)
+    implementation(Libs.Coil.coil)
+    implementation(Libs.Timber.timber)
 
-    // Moshi
-    implementation("com.squareup.moshi:moshi:$moshiVersion")
-    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
-    implementation("com.squareup.moshi:moshi-adapters:$moshiVersion")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    // debug
+    debugImplementation(Libs.LeakCanary.android)
+    debugImplementation(Libs.Hyperion.core)
 
-    // Material
-    implementation("com.google.android.material:material:1.2.1")
+    // test
+    testImplementation(Libs.AndroidX.testing)
+    testImplementation(Libs.JUnit.junit)
+    testImplementation(Libs.Mockito.kotlin)
+    testImplementation(Libs.AndroidX.Room.test)
 
-    // Coil
-    implementation("io.coil-kt:coil:1.0.0-rc1")
-
-    // Timber
-    implementation("com.jakewharton.timber:timber:4.7.1")
-
-    // LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
-
-    // Hyperion
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.29")
-
-    // Test Library
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation("junit:junit:4.13")
-    testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
-    testImplementation("androidx.room:room-testing:$roomVersion")
-
-    // AndroidX - Test Library
-    androidTestImplementation("androidx.test:runner:1.3.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    // android test
+    androidTestImplementation(Libs.AndroidX.Test.runner)
+    androidTestImplementation(Libs.AndroidX.Test.junit)
+    androidTestImplementation(Libs.AndroidX.Test.espresso)
 }
 
 kapt {
