@@ -67,8 +67,6 @@ dependencies {
     val lifecycleVersion by extra("2.2.0")
     val roomVersion by extra("2.2.5")
     val hiltVersion by extra("1.0.0-alpha02")
-    val daggerVersion by extra("2.28")
-    val daggerAndroidVersion by extra("2.27")
     val daggerHiltVersion by extra("2.28-alpha")
     val retrofitVersion by extra("2.9.0")
     val moshiVersion by extra("1.9.3")
@@ -103,15 +101,6 @@ dependencies {
     implementation("androidx.hilt:hilt-common:$hiltVersion")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion")
     kapt("androidx.hilt:hilt-compiler:$hiltVersion")
-
-    // Dagger
-    implementation("com.google.dagger:dagger:$daggerVersion")
-    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
-
-    // Dagger - Android
-    api("com.google.dagger:dagger-android:$daggerAndroidVersion")
-    api("com.google.dagger:dagger-android-support:$daggerAndroidVersion")
-    kapt("com.google.dagger:dagger-android-processor:$daggerAndroidVersion")
 
     // Dagger - Hilt Support
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
