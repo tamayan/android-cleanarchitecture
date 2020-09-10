@@ -2,12 +2,14 @@ name: Android CI
 
 on:
   push:
-    branches: [ master, feature/ci ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
   build:
+
+    name: Build on merge
 
     runs-on: ubuntu-latest
 
@@ -29,5 +31,12 @@ jobs:
           echo "BASE_URL"=${BASE_URL} >> ./local.properties
           echo "BASIC_USER_NAME"=${BASIC_USER_NAME} >> ./local.properties
           echo "BASIC_PASS"=${BASIC_PASS} >> ./local.properties
+
+      - name: Run Android Lint
+        run: ./gradlew lintDebug
+
+      - name: Unit Test
+        run: ./gradlew testDebug
+
       - name: Build with Gradle
-        run: ./gradlew build
+          run: ./gradlew assembleDebug
