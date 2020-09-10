@@ -10,7 +10,6 @@ jobs:
   build:
 
     name: Build on merge
-
     runs-on: ubuntu-latest
 
     steps:
@@ -40,3 +39,11 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew assembleDebug
+
+      - name: Distribute App
+          run: |
+            curl \
+             -H "Authorization: token ${{secrets.DEPLOYGATE_API_KEY}}" \
+             -F "file=@app/build/outputs/apk/debug/app-debug.apk" \
+             -F "message=Any message" \
+             "https://deploygate.com/api/users/${{secrets.DEPLOYGATE_USER}}/apps"
