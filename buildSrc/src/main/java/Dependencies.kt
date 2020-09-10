@@ -125,4 +125,8 @@ object Libs {
     object Mockito {
         const val kotlin = "com.nhaarman:mockito-kotlin:1.6.0"
     }
+
+    object DeployGate {
+        const val sdk = "com.deploygate:sdk:4.1.0"
+    }
 }

@@ -110,6 +110,7 @@ dependencies {
     implementation(Libs.Material.material)
     implementation(Libs.Coil.coil)
     implementation(Libs.Timber.timber)
+    implementation(Libs.DeployGate.sdk)
 
     // debug
     debugImplementation(Libs.LeakCanary.android)
