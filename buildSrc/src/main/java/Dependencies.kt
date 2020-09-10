@@ -11,7 +11,7 @@ object Versions {
     const val minSdk = 24
 
     private const val versionMajor = 1
-    private const val versionMinor = 1
+    private const val versionMinor = 0
     private const val versionPatch = 0
     private const val versionOffset = 0
 

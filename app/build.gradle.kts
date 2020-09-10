@@ -1,3 +1,11 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val local = Properties()
+val localProperties: File = rootProject.file("local.properties")
+if (localProperties.exists()) {
+    localProperties.inputStream().use { local.load(it) }
+}
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -31,9 +39,9 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
-            buildConfigField("String", "BASE_URL", "\"${getLocalProperties("release_base_url")}\"")
-            buildConfigField("String", "BASIC_USER_NAME", "\"${getLocalProperties("release_user_name")}\"")
-            buildConfigField("String", "BASIC_PASS", "\"${getLocalProperties("release_password")}\"")
+            buildConfigField("String", "BASE_URL", "\"${local.getProperty("release_base_url")}\"")
+            buildConfigField("String", "BASIC_USER_NAME", "\"${local.getProperty("release_user_name")}\"")
+            buildConfigField("String", "BASIC_PASS", "\"${local.getProperty("release_password")}\"")
         }
 
         getByName("debug") {
@@ -41,9 +49,9 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = Packages.debugNameSuffix
 
-            buildConfigField("String", "BASE_URL", "\"${getLocalProperties("debug_base_url")}\"")
-            buildConfigField("String", "BASIC_USER_NAME", "\"${getLocalProperties("debug_user_name")}\"")
-            buildConfigField("String", "BASIC_PASS", "\"${getLocalProperties("debug_password")}\"")
+            buildConfigField("String", "BASE_URL", "\"${local.getProperty("debug_base_url")}\"")
+            buildConfigField("String", "BASIC_USER_NAME", "\"${local.getProperty("debug_user_name")}\"")
+            buildConfigField("String", "BASIC_PASS", "\"${local.getProperty("debug_password")}\"")
         }
     }
 
@@ -117,8 +125,4 @@ dependencies {
     androidTestImplementation(Libs.AndroidX.Test.runner)
     androidTestImplementation(Libs.AndroidX.Test.junit)
     androidTestImplementation(Libs.AndroidX.Test.espresso)
-}
-
-fun getLocalProperties(key: String): String {
-    return com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir).getProperty(key)
 }
