@@ -28,9 +28,9 @@ jobs:
           BASIC_USER_NAME: ${{ secrets.BASIC_USER_NAME }}
           BASIC_PASS: ${{ secrets.BASIC_PASS }}
         run: |
-          echo "BASE_URL"=${BASE_URL} >> ./local.properties
-          echo "BASIC_USER_NAME"=${BASIC_USER_NAME} >> ./local.properties
-          echo "BASIC_PASS"=${BASIC_PASS} >> ./local.properties
+          echo "debug_base_url"=${BASE_URL} >> ./local.properties
+          echo "debug_user_name"=${BASIC_USER_NAME} >> ./local.properties
+          echo "debug_password"=${BASIC_PASS} >> ./local.properties
 
       - name: Run Android Lint
         run: ./gradlew lintDebug
