@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "ROOM_DATABASE_NAME", "\"AppDatabase.db\"")
-        buildConfigField("String", "THUMBNAIL_URL", "\"http://img.youtube.com/vi/%s/maxresdefault.jpg\"")
+        buildConfigField("String", "THUMBNAIL_URL", "\"https://img.youtube.com/vi/%s/maxresdefault.jpg\"")
     }
 
     buildTypes {
