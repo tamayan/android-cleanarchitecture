@@ -30,6 +30,7 @@ object NetworkModule {
                         val request = chain
                                 .request()
                                 .newBuilder()
+                                .addHeader("Authorization", "Bearer " + BuildConfig.BEARER_TOKEN)
                                 .addHeader("Authorization", Credentials.basic(BuildConfig.BASIC_USER_NAME, BuildConfig.BASIC_PASS))
                                 .build()
                         chain.proceed(request)

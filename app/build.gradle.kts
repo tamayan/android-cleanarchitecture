@@ -40,6 +40,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
             buildConfigField("String", "BASE_URL", "\"${local.getProperty("release_base_url")}\"")
+            buildConfigField("String", "BEARER_TOKEN", "\"${local.getProperty("release_bearer_token")}\"")
             buildConfigField("String", "BASIC_USER_NAME", "\"${local.getProperty("release_user_name")}\"")
             buildConfigField("String", "BASIC_PASS", "\"${local.getProperty("release_password")}\"")
         }
@@ -50,6 +51,7 @@ android {
             applicationIdSuffix = Packages.debugNameSuffix
 
             buildConfigField("String", "BASE_URL", "\"${local.getProperty("debug_base_url")}\"")
+            buildConfigField("String", "BEARER_TOKEN", "\"${local.getProperty("debug_bearer_token")}\"")
             buildConfigField("String", "BASIC_USER_NAME", "\"${local.getProperty("debug_user_name")}\"")
             buildConfigField("String", "BASIC_PASS", "\"${local.getProperty("debug_password")}\"")
         }
