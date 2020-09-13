@@ -24,10 +24,12 @@ jobs:
       - name: Create local.properties
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
           BASIC_USER_NAME: ${{ secrets.BASIC_USER_NAME }}
           BASIC_PASS: ${{ secrets.BASIC_PASS }}
         run: |
           echo "debug_base_url"=${BASE_URL} >> ./local.properties
+          echo "debug_bearer_token"=${BEARER_TOKEN} >> ./local.properties
           echo "debug_user_name"=${BASIC_USER_NAME} >> ./local.properties
           echo "debug_password"=${BASIC_PASS} >> ./local.properties
 
